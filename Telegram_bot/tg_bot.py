@@ -9,7 +9,6 @@ logging.basicConfig(filename='./Telegram_bot/bot.log', level=logging.INFO,
                     format="%(asctime)s %(levelname)s %(message)s" ) # Логгируем ВСЕ сообщения в файл "bot.log" по формату <Врмемя Тип сообщения Сообщение>
 
 
-
 import inspect
 
 def showVarType(var) -> None: # Узнаём тип данных произвольной переменной
