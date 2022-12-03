@@ -5,7 +5,7 @@
 
 import logging
 
-logging.basicConfig(filename='bot.log', level=logging.INFO,
+logging.basicConfig(filename='./Telegram_bot/bot.log', level=logging.INFO,
                     format="%(asctime)s %(levelname)s %(message)s" ) # Логгируем ВСЕ сообщения в файл "bot.log" по формату <Врмемя Тип сообщения Сообщение>
 
 
@@ -17,8 +17,9 @@ def showVarType(var) -> None: # Узнаём тип данных произво�
     varName = [name for name, value in caller_locals.items() if var is value] # Получаем имя переменной 
     print(var, f'\n{varName} type is {type(var)}') # Узнаём тип данных переменной 
 
+import settings # Импортируем "защищенный" файл с "важной" информацией
 
-strBotToken = '5620370083:AAGu5OcD-59_sNmPevlZqq8AplOxJkGKwR0'
+strBotToken = settings.API_KEY # Токен из "защищенного" файла settings.py
 
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
@@ -93,6 +94,5 @@ def main(strBotToken):
     
     
 
-    
-
-main(strBotToken)
+if __name__ == '__main__': # Если файл tg_bot.py вызаван, то будет запущен main(strBotToken); Если он будет импортироват то ничего не произайдёт
+    main(strBotToken)
