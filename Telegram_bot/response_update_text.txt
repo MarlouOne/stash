@@ -1,0 +1,33 @@
+{
+    'message': 
+    {
+        'text': '/start',
+        'date': 1670079039,
+        'channel_chat_created': False,
+        'new_chat_photo': [],
+        'message_id': 141,
+        'new_chat_members': [], 
+        'entities': [{'offset': 0, 'type': 'bot_command', 'length': 6}],
+        'supergroup_chat_created': False,
+        'photo': [],
+        'chat': 
+            {
+                'username': 'DailyByCompany',
+                'id': 333206847,
+                'first_name': 'Бармалей',
+                'type': 'private'
+            },
+        'delete_chat_photo': False,
+        'caption_entities': [],
+        'group_chat_created': False,
+        'from': 
+            {
+                'id': 333206847,
+                'username': 'DailyByCompany', 
+                'first_name': 'Бармалей', 
+                'is_bot': False, 
+                'language_code': 'ru'
+            }
+    },
+      'update_id': 504006446
+} 
