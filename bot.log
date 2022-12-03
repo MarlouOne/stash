@@ -1,0 +1,9 @@
+INFO:apscheduler.scheduler:Scheduler started
+INFO:apscheduler.scheduler:Scheduler started
+2022-12-03 19:44:39,801 INFO Scheduler started
+2022-12-03 19:44:40,022 INFO Bot is alive !
+2022-12-03 19:44:41,633 INFO Funcion 'start' was colled !
+2022-12-03 20:05:37,786 INFO Scheduler started
+2022-12-03 20:05:38,048 INFO Bot is alive !
+2022-12-03 20:05:39,545 INFO Funcion 'start' was colled !
+2022-12-03 20:05:47,152 INFO Funcion 'send_echoMessage' was colled !
