@@ -28,25 +28,24 @@ import sys, os
 sys.path.insert(0, os.path.abspath('./'))
 import Google_sheets_extension.Google_sheet_extension_v2
 
-import telegram 
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
 
+# def generat_KeyboardButton( listButtons : list) -> None: # Функция генерации новых кнопок на панели
+#     markup = types.ReplyKeyboardMarkup(resize_keyboard=True) # Создаём разметку
+#     for strButtons in listButtons: 
+#         btn = types.KeyboardButton( text=strButtons) # Создаём кнопу с конкретным название
+#         markup.add(btn) # Добавляем кнопку в разметку
+#     return markup # Возвращаем разметку
 
-def generat_KeyboardButton( listButtons : list) -> None: # Функция генерации новых кнопок на панели
-    markup = telegram.ReplyKeyboardMarkup(resize_keyboard=True) # Создаём разметку
-    for strButtons in listButtons: 
-        btn = telegram.KeyboardButton( text=strButtons) # Создаём кнопу с конкретным название
-        markup.add(btn) # Добавляем кнопку в разметку
-    return markup # Возвращаем разметку
-
-def generat_InlineButtons( dictButtons : dict) -> None: # Функция генерации новых контекстных кнопок 
-    markup = telegram.InlineKeyboardMarkup() # Создаём разметку
-    for dictButton in dictButtons:
-        btn = telegram.InlineKeyboardButton(text=dictButton, callback_data=dictButtons[dictButton]) # Создаём кнопу с конкретным название и значением обратного ответа
-        markup.add(btn) # Добавляем кнопку в разметку
-    return markup # Возвращаем разметку
+# def generat_InlineButtons( dictButtons : dict) -> None: # Функция генерации новых контекстных кнопок 
+#     markup = types.InlineKeyboardMarkup() # Создаём разметку
+#     for dictButton in dictButtons:
+#         btn = types.InlineKeyboardButton(text=dictButton, callback_data=dictButtons[dictButton]) # Создаём кнопу с конкретным название и значением обратного ответа
+#         markup.add(btn) # Добавляем кнопку в разметку
+#     return markup # Возвращаем разметку
 
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
-
+import telegram
 
 def get_user(update): # Функция получения данных о пользователе
     """
@@ -75,6 +74,10 @@ def func_start(update, context): # Функция обработки коман�
 
     userInfo = get_user(update) # Получаем информацию о пользователе
 
+    showVarType(update)
+    showVarType(context)
+    
+
     # print(userInfo.items()) # Не работает
 
     subText = ''
@@ -89,7 +92,7 @@ def func_start(update, context): # Функция обработки коман�
 
     update.message.reply_text(replyText) # Ответ пользователю в чате telegram
 
-def send_echoMessage(update, context) -> None: # Функция, которая отвечат пользователю тем же сообщение текстовым которое он отправил
+def send_echoMessage(update : telegram.update.Update, context) -> None: # Функция, которая отвечат пользователю тем же сообщение текстовым которое он отправил
     print("Funcion 'send_echoMessage' was colled !")
     logging.info("Funcion 'send_echoMessage' was colled !")
 
@@ -97,15 +100,29 @@ def send_echoMessage(update, context) -> None: # Функция, которая 
     print(f'Users text is "{replyText}"') 
     update.message.reply_text(replyText) # Ответ пользователю в чате telegram
 
-def select_mode(update, context): # , message: types.Message
-    print('User now in choose mode!')
-    print(update.data)
-    dictInlineButtons = {
-                    'Do you want to select a phone ?' :  'select_phone',
-                    'Do you want to generate a cringe ?' : 'generate_cringe'
-                  }
-    markup = generat_InlineButtons(dictInlineButtons)
-    update.send_message(update.message.chat.id, "Make your choise :", reply_markup=markup)
+def set_echoButton(update : telegram.update.Update, context): # Функция вывода на экран кнопки с введенным пользователем текстом
+    print("Funcion 'set_echoButton' was colled !")
+    logging.info("Funcion 'set_echoButton' was colled !")
+
+    message = update.message.text # Получаем текстовое сообщени пользователя 
+    keyboard = [ [ InlineKeyboardButton(message, callback_data='None') ] ] # Создаём кнопку с введённым текстом
+    markup = InlineKeyboardMarkup(keyboard) # Создаём разметку с полученной кнопкой
+
+    # update.message.bot.send_message( text='Echo should be button is here !') # Не работает
+    # update.message.bot.send_message(chat_id = update.message.chat_id, text='Echo button is here !', reply_markup = markup) # Не работает
+
+    update.message.reply_text( text='Echo should be button is here !') 
+    update.message.reply_text( text='Echo button is here !', reply_markup = markup) # Выводим кнопку в чат 
+
+    # update.bot.send_message(chat_id = update.message.chat_id, text='Echo button is here !', reply_markup = markup) # Не работает
+    # context.bot.send_message(chat_id = update.message.chat_id, text='Echo button is here !', reply_markup = markup) # Не работает
+
+def textHandler(update, context): # Функция обработки текстовых сообщений
+    print("Funcion 'textHandler' was colled !")
+    logging.info("Funcion 'textHandler' was colled !")
+
+    send_echoMessage(update, context)
+    set_echoButton(update, context)
 
 def googleSheets_handler(update):
     print("Funcion 'googleSheets_handler' was colled !")
@@ -122,11 +139,11 @@ def set_commandHandlers(mybot): # Функция обявляет ручки д�
     dp = mybot.dispatcher # Создаём объект <Диспетчер>
 
     dp.add_handler(CommandHandler('start', func_start)) # Ручка для команды "/start"
-    dp.add_handler(MessageHandler(Filters.text, select_mode)) # Ручка для всего получаемого текста
+    dp.add_handler(MessageHandler(Filters.text, textHandler)) # Ручка для всего получаемого текста
 
     return dp # Возвращаем диспетчер со всеми "ручками"
 
-def main(strBotToken):
+def main(strBotToken): # Функция основоного стека вызова
     mybot = Updater(strBotToken, use_context=True) # Создаём объект "mybot" класса "Updater" отвечающий за взаимодействие с сервером telegram
 
     dp = set_commandHandlers(mybot) # Создаём объект <Диспетчер>
@@ -138,7 +155,5 @@ def main(strBotToken):
 
     mybot.idle() # бот работает пока работает хост
     
-    
-
 if __name__ == '__main__': # Если файл tg_bot.py вызаван, то будет запущен main(strBotToken); Если он будет импортироват то ничего не произайдёт
     main(strBotToken)

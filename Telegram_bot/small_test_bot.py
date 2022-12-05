@@ -5,15 +5,18 @@
 
 strBotToken = '5620370083:AAGu5OcD-59_sNmPevlZqq8AplOxJkGKwR0'
 
-import pandas as pd
-import support_function as sf
-import telebot
-from telebot import types
+# import pandas as pd
+# import support_function as sf
+import telebot 
 
 bot = telebot.TeleBot(strBotToken)
 
-df = sf.get_df()
-print(df)
+from telebot import types
+
+
+
+# df = sf.get_df()
+# print(df)
 
 def generat_KeyboardButton( listButtons : list) -> None:
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True) #создание новых кнопок
@@ -65,7 +68,7 @@ def select_mode(call): # , message: types.Message
 
 def select_phone(message: types.Message, call):
     print('User now in select phone mode!')
-    dfLocal = df
+    # dfLocal = df
     
     strColor  = ""
     strMemory = ""
@@ -83,22 +86,22 @@ def select_phone(message: types.Message, call):
     markup = generat_KeyboardButton(list(dictInlineButtons))
     bot.send_message(call.message.chat.id, "Find an offer :", reply_markup=markup)
 
-    while True:
-        if message.text == 'Select color':
-            print('select_color')
-            listColors = sf.get_listUniqueValues(dfLocal, 'color')
-        elif message.text == 'Select memory count':
-            print('select_memory')
-            listMemory = sf.get_listUniqueValues(dfLocal, 'memory')
-        elif message.text == 'Select phone type':
-            print('select_type')
-            listColors = sf.get_listUniqueValues(dfLocal, 'type')
-        elif message.text == 'Select phone model':
-            print('select_model')
-            listColors = sf.get_listUniqueValues(dfLocal, 'model')
-        elif message.text == 'Back':
-            print('Back')
-            call.data = 'online'
+    # while True:
+    #     if message.text == 'Select color':
+    #         print('select_color')
+    #         listColors = sf.get_listUniqueValues(dfLocal, 'color')
+    #     elif message.text == 'Select memory count':
+    #         print('select_memory')
+    #         listMemory = sf.get_listUniqueValues(dfLocal, 'memory')
+    #     elif message.text == 'Select phone type':
+    #         print('select_type')
+    #         listColors = sf.get_listUniqueValues(dfLocal, 'type')
+    #     elif message.text == 'Select phone model':
+    #         print('select_model')
+    #         listColors = sf.get_listUniqueValues(dfLocal, 'model')
+    #     elif message.text == 'Back':
+    #         print('Back')
+    #         call.data = 'online'
 
     # while call.data != 'online':
     #     if call.data == 'select_color':
