@@ -3,11 +3,12 @@
 
 # t.me/Small_test_project_bot
 
+from pprint import pprint
+
 import logging
 
 logging.basicConfig(filename='./Telegram_bot/bot.log', level=logging.INFO,
                     format="%(asctime)s %(levelname)s %(message)s" ) # Логгируем ВСЕ сообщения в файл "bot.log" по формату <Врмемя Тип сообщения Сообщение>
-
 
 import inspect
 
@@ -20,7 +21,32 @@ import settings # Импортируем "защищенный" файл с "в�
 
 strBotToken = settings.API_KEY # Токен из "защищенного" файла settings.py
 
+CREDENTIALS_FILE = 'pythonextension-202bab519501.json'  # Файла "pythonextension-202bab519501.json", содержащий закрытый ключ 
+
+import sys, os
+
+sys.path.insert(0, os.path.abspath('./'))
+import Google_sheets_extension.Google_sheet_extension_v2
+
+import telegram 
+
+
+def generat_KeyboardButton( listButtons : list) -> None: # Функция генерации новых кнопок на панели
+    markup = telegram.ReplyKeyboardMarkup(resize_keyboard=True) # Создаём разметку
+    for strButtons in listButtons: 
+        btn = telegram.KeyboardButton( text=strButtons) # Создаём кнопу с конкретным название
+        markup.add(btn) # Добавляем кнопку в разметку
+    return markup # Возвращаем разметку
+
+def generat_InlineButtons( dictButtons : dict) -> None: # Функция генерации новых контекстных кнопок 
+    markup = telegram.InlineKeyboardMarkup() # Создаём разметку
+    for dictButton in dictButtons:
+        btn = telegram.InlineKeyboardButton(text=dictButton, callback_data=dictButtons[dictButton]) # Создаём кнопу с конкретным название и значением обратного ответа
+        markup.add(btn) # Добавляем кнопку в разметку
+    return markup # Возвращаем разметку
+
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
+
 
 def get_user(update): # Функция получения данных о пользователе
     """
@@ -71,11 +97,32 @@ def send_echoMessage(update, context) -> None: # Функция, которая 
     print(f'Users text is "{replyText}"') 
     update.message.reply_text(replyText) # Ответ пользователю в чате telegram
 
+def select_mode(update, context): # , message: types.Message
+    print('User now in choose mode!')
+    print(update.data)
+    dictInlineButtons = {
+                    'Do you want to select a phone ?' :  'select_phone',
+                    'Do you want to generate a cringe ?' : 'generate_cringe'
+                  }
+    markup = generat_InlineButtons(dictInlineButtons)
+    update.send_message(update.message.chat.id, "Make your choise :", reply_markup=markup)
+
+def googleSheets_handler(update):
+    print("Funcion 'googleSheets_handler' was colled !")
+    logging.info("Funcion 'googleSheets_handler' was colled !")
+
+    message = update.message.text # Получаем текстовое сообщени пользователя 
+    message = message.split('\n')
+    print(message)
+
+    if message[0] == '':
+        print(message[0])
+
 def set_commandHandlers(mybot): # Функция обявляет ручки для диспетчра 
     dp = mybot.dispatcher # Создаём объект <Диспетчер>
 
     dp.add_handler(CommandHandler('start', func_start)) # Ручка для команды "/start"
-    dp.add_handler(MessageHandler(Filters.text, send_echoMessage)) # Ручка для всего получаемого текста
+    dp.add_handler(MessageHandler(Filters.text, select_mode)) # Ручка для всего получаемого текста
 
     return dp # Возвращаем диспетчер со всеми "ручками"
 

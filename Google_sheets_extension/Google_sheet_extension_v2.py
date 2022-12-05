@@ -167,27 +167,28 @@ def show_sheetInfo(service, spreadsheetId, ranges = ["Лист номер оди
     print('\nШирина ячейки')
     print(results['sheets'][0]['data'][0]['columnMetadata'])
 
-
-CREDENTIALS_FILE = 'pythonextension-202bab519501.json'  # Имя файла с закрытым ключом, вы должны подставить свое
-# Читаем ключи из файла
-
-def get_sheet_service(CREDENTIALS_FILE):
+def get_sheet_service(CREDENTIALS_FILE): # Получаем доступ к нужной таблице с заранее подключенным потом
     json = os.path.dirname(__file__) + '\\' + CREDENTIALS_FILE
     print(json)
     scopes = ['https://www.googleapis.com/auth/spreadsheets']
     credentials = ServiceAccountCredentials.from_json_keyfile_name(json,scopes).authorize(httplib2.Http())
     return build('sheets','v4', http=credentials)
 
-# service = get_service(CREDENTIALS_FILE)
-service = get_sheet_service(CREDENTIALS_FILE) # Создаём службу для работы с таблицей
-sheet   = service.spreadsheets() 
-sheet_id = '1s7CcKw-uDbmjeSDgiB_jQQ2CwYq3t14k0Y_3kxO2KqA' # ID нужной нам Google sheet
 
 
+def main():
+    CREDENTIALS_FILE = 'pythonextension-202bab519501.json'  # Имя файла с закрытым ключом, вы должны подставить свое
+    # Читаем ключи из файла
 
+    # service = get_service(CREDENTIALS_FILE)
+    service = get_sheet_service(CREDENTIALS_FILE) # Создаём службу для работы с таблицей
+    sheet   = service.spreadsheets() 
+    # https://docs.google.com/spreadsheets/d/1s7CcKw-uDbmjeSDgiB_jQQ2CwYq3t14k0Y_3kxO2KqA/edit#gid=937792580
+    sheet_id = '1s7CcKw-uDbmjeSDgiB_jQQ2CwYq3t14k0Y_3kxO2KqA' # ID нужной нам Google sheet
+    resp = sheet.values().get(spreadsheetId = sheet_id, range = 'Лист1').execute() # Чтение из таблицы
+    print(resp)
 
-# https://docs.google.com/spreadsheets/d/1s7CcKw-uDbmjeSDgiB_jQQ2CwYq3t14k0Y_3kxO2KqA/edit#gid=937792580
+if __name__ == '__main__': # Если файл tg_bot.py вызаван, то будет запущен main(strBotToken); Если он будет импортироват то ничего не произайдёт
+    main()
 
-resp = sheet.values().get(spreadsheetId = sheet_id, range = 'Лист1').execute() # Чтение из таблицы
-
-print(resp)
+print('Google_sheet_extension_v2 is here !')
