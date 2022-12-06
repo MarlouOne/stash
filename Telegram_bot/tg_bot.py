@@ -28,7 +28,7 @@ import sys, os
 sys.path.insert(0, os.path.abspath('./')) # Добавляем папку выше уровнем для получения содержимого папки Google_sheets_extension
 import Google_sheets_extension.Google_sheet_extension_v2
 
-from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update, ReplyKeyboardMarkup, KeyboardButton
 
 # def generat_KeyboardButton( listButtons : list) -> None: # Функция генерации новых кнопок на панели
 #     markup = types.ReplyKeyboardMarkup(resize_keyboard=True) # Создаём разметку
@@ -48,8 +48,6 @@ from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, Callb
 import telegram
 from random import randint
 # from telegram.ext import *
-
-
 
 def get_user(update : telegram.update.Update): # Функция получения данных о пользователе
     """
@@ -121,7 +119,7 @@ def send_randomPhoto(update : telegram.update.Update) -> None: # Функция,
 
     update.callback_query.message.reply_photo(photo=img['photo'], caption='Regular photo')
 
-def set_echoButton(update : telegram.update.Update, context): # Функция вывода на экран кнопки с введенным пользователем текстом
+def set_echoInLineButton(update : telegram.update.Update, context): # Функция вывода на экран кнопки с введенным пользователем текстом
     print("Funcion 'set_echoButton' was colled !")
     logging.info("Funcion 'set_echoButton' was colled !")
 
@@ -137,16 +135,26 @@ def set_echoButton(update : telegram.update.Update, context): # Функция �
     update.message.reply_text( text='Echo button should be is here !') 
     update.message.reply_text( text='Echo button is here !', reply_markup = markup) # Выводим кнопку в чат 
 
+def set_echoKeyboardButton(update : telegram.update.Update, context): # Функция вывода на панель кнопки с введенным пользователем текстом
+    print("Funcion 'set_echoKeyboardButton' was colled !")
+    logging.info("Funcion 'set_echoKeyboardButton' was colled !")
+    keyboard = [ [ KeyboardButton('Case 1'), KeyboardButton('Case 2') ] ] # Создаём кнопку с введённым текстом | Нет параметра "Callback_data" 
+    markup = ReplyKeyboardMarkup(keyboard, resize_keyboard = True, one_time_keyboard = True, input_field_placeholder = "Keyboard :")
+    update.message.reply_text( text='___', reply_markup = markup)# Выводим кнопку в чат 
+    # update.message.bot.delete_message(update.message.chat.id, update.message.message_id)
+
 def callbackHandler(update: Update, context): # Функция обработки обаратных запросов (callback_data)
     print("Funcion 'callbackHandler' was colled !")
     logging.info("Funcion 'callbackHandler' was colled !")
-    query = update.callback_query.data
-    print(query)
+    query = update.callback_query.data # Вычленяем обаратный запрос (callback_data)
+    logging.info(f"Query - '{query}' !")
+    
+    print(f"Query - '{query}' !")
+
     if query == 'echoCallback':
         echoCallback(update) # Ручка для обработки "callback_data='echoCallback'"
     elif query == 'send_randomPhoto':
         send_randomPhoto(update)
-
 
 def echoCallback(update: Update): # Функция отправки окна с сообщением по нажатию кнопки с "callback='echoCallback'"
     print("Funcion 'echoCallback' was colled !")
@@ -166,9 +174,17 @@ def echoCallback(update: Update): # Функция отправки окна с 
 def textHandler(update : telegram.update.Update, context): # Функция обработки текстовых сообщений
     print("Funcion 'textHandler' was colled !")
     logging.info("Funcion 'textHandler' was colled !")
+    # contentText = update.message.text
+    # print(update.message.message_id)
+    # print(contentText)
+
+    # if contentText == "--TODEL" : 
+    #     # update.messagedelete_message(message.chat.id,message.message_id)
+    #     update.message.bot.delete_message(update.message.chat.id, update.message.message_id)
 
     send_echoMessage(update, context)
-    set_echoButton(update, context)
+    set_echoInLineButton(update, context)
+    set_echoKeyboardButton(update, context)
 
 def googleSheets_handler(update):
     print("Funcion 'googleSheets_handler' was colled !")
