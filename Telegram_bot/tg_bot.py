@@ -25,7 +25,7 @@ CREDENTIALS_FILE = 'pythonextension-202bab519501.json'  # Файла "pythonexte
 
 import sys, os
 
-sys.path.insert(0, os.path.abspath('./'))
+sys.path.insert(0, os.path.abspath('./')) # Добавляем папку выше уровнем для получения содержимого папки Google_sheets_extension
 import Google_sheets_extension.Google_sheet_extension_v2
 
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
@@ -44,10 +44,11 @@ from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
 #         markup.add(btn) # Добавляем кнопку в разметку
 #     return markup # Возвращаем разметку
 
-from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
+from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackQueryHandler
 import telegram
+# from telegram.ext import *
 
-def get_user(update): # Функция получения данных о пользователе
+def get_user(update : telegram.update.Update): # Функция получения данных о пользователе
     """
     print(dict(update)) # Не работает
     print(str(update)) # Работает
@@ -67,7 +68,7 @@ def get_user(update): # Функция получения данных о пол
 
     return userInfo # Возвращаем данные о пользователе
 
-def func_start(update, context): # Функция обработки команды "/start"
+def func_start(update : telegram.update.Update, context): # Функция обработки команды "/start"
     print("Funcion 'start' was colled !")
     logging.info("Funcion 'start' was colled !")
     # print("Update :\n", update, f'\nUpdate type is {type(update)}', "\nContext :\n", context, f'\nContext type is {type(context)}')
@@ -105,19 +106,42 @@ def set_echoButton(update : telegram.update.Update, context): # Функция �
     logging.info("Funcion 'set_echoButton' was colled !")
 
     message = update.message.text # Получаем текстовое сообщени пользователя 
-    keyboard = [ [ InlineKeyboardButton(message, callback_data='None') ] ] # Создаём кнопку с введённым текстом
+    keyboard = [ [ InlineKeyboardButton(message, callback_data='echoCallback') ] ] # Создаём кнопку с введённым текстом
     markup = InlineKeyboardMarkup(keyboard) # Создаём разметку с полученной кнопкой
-
+    
     # update.message.bot.send_message( text='Echo should be button is here !') # Не работает
     # update.message.bot.send_message(chat_id = update.message.chat_id, text='Echo button is here !', reply_markup = markup) # Не работает
-
-    update.message.reply_text( text='Echo should be button is here !') 
-    update.message.reply_text( text='Echo button is here !', reply_markup = markup) # Выводим кнопку в чат 
-
     # update.bot.send_message(chat_id = update.message.chat_id, text='Echo button is here !', reply_markup = markup) # Не работает
     # context.bot.send_message(chat_id = update.message.chat_id, text='Echo button is here !', reply_markup = markup) # Не работает
+    
+    update.message.reply_text( text='Echo button should be is here !') 
+    update.message.reply_text( text='Echo button is here !', reply_markup = markup) # Выводим кнопку в чат 
 
-def textHandler(update, context): # Функция обработки текстовых сообщений
+def echoCallback(update: Update, context): # Функция отправки окна с сообщением по нажатию кнопки с "callback='echoCallback'"
+    if update.callback_query.data == 'echoCallback':
+        print("Funcion 'echoCallback' was colled !")
+        logging.info("Funcion 'echoCallback' was colled !")
+
+        query = update.callback_query # Информационное сообщение в виде словаря словарей 
+
+        # showVarType(update) # -> telegram.update.Update'
+
+        print("query :", query) 
+        # showVarType(query) # -> telegram.callbackquery.CallbackQuery
+
+        data = query.data # Callback, который был передан в результате действия (например - нажатия кнопки)
+
+        # print('data :', data)
+        # showVarType(data) # -> str
+
+        replyText = f'This is echo button callback - {data}!' # Создаём информационное сообщение 
+
+        # update.message.reply_text( text = replyText ) # Не работает
+
+        update.callback_query.answer(replyText, show_alert=True) # Выводим ответ на экран <=> query.answer(replyText) 
+        query.message.reply_text(replyText) # Выводим ответ в чат
+
+def textHandler(update : telegram.update.Update, context): # Функция обработки текстовых сообщений
     print("Funcion 'textHandler' was colled !")
     logging.info("Funcion 'textHandler' was colled !")
 
@@ -135,12 +159,12 @@ def googleSheets_handler(update):
     if message[0] == '':
         print(message[0])
 
-def set_commandHandlers(mybot): # Функция обявляет ручки для диспетчра 
+def set_commandHandlers(mybot : Updater): # Функция обявляет ручки для диспетчра 
     dp = mybot.dispatcher # Создаём объект <Диспетчер>
 
     dp.add_handler(CommandHandler('start', func_start)) # Ручка для команды "/start"
     dp.add_handler(MessageHandler(Filters.text, textHandler)) # Ручка для всего получаемого текста
-
+    dp.add_handler(CallbackQueryHandler(echoCallback)) # Ручка для обработки "callback_data='echoCallback'"
     return dp # Возвращаем диспетчер со всеми "ручками"
 
 def main(strBotToken): # Функция основоного стека вызова
