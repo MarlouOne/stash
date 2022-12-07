@@ -23,6 +23,8 @@ strBotToken = settings.API_KEY # Токен из "защищенного" фай
 
 CREDENTIALS_FILE = 'pythonextension-202bab519501.json'  # Файла "pythonextension-202bab519501.json", содержащий закрытый ключ 
 
+path = '.\Telegram_bot\src' # Путь к папке с фотографиями
+
 import sys, os
 
 sys.path.insert(0, os.path.abspath('./')) # Добавляем папку выше уровнем для получения содержимого папки Google_sheets_extension
@@ -102,12 +104,11 @@ def send_echoMessage(update : telegram.update.Update, context) -> None: # Фун
     print(f'Users text is "{replyText}"') 
     update.message.reply_text(replyText) # Ответ пользователю в чате telegram
 
-def send_randomPhoto(update : telegram.update.Update) -> None: # Функция, которая отправляет случайнуюю фотографию из папки "src"
+def send_randomPhoto(update : telegram.update.Update, path : str) -> None: # Функция, которая отправляет случайнуюю фотографию из папки "src"
     print("Funcion 'send_randomPhoto' was colled !")
     logging.info("Funcion 'send_randomPhoto' was colled !")
     # print(update)
 
-    path = '.\Telegram_bot\src' # Путь к папке с фотографиями
     content = os.listdir (path) # C:\Users\major\Documents\GitHub\stash\Telegram_bot\tg_bot.py  C:\Users\major\Documents\GitHub\stash\Telegram_bot\src
     photoPath = path + '\\' + content[randint(0,len(content)-1)]
 
@@ -144,6 +145,7 @@ def set_echoKeyboardButton(update : telegram.update.Update, context): # Функ
     # update.message.bot.delete_message(update.message.chat.id, update.message.message_id)
 
 def callbackHandler(update: Update, context): # Функция обработки обаратных запросов (callback_data)
+    global path
     print("Funcion 'callbackHandler' was colled !")
     logging.info("Funcion 'callbackHandler' was colled !")
     query = update.callback_query.data # Вычленяем обаратный запрос (callback_data)
@@ -154,7 +156,7 @@ def callbackHandler(update: Update, context): # Функция обработк�
     if query == 'echoCallback':
         echoCallback(update) # Ручка для обработки "callback_data='echoCallback'"
     elif query == 'send_randomPhoto':
-        send_randomPhoto(update)
+        send_randomPhoto(update, path)
 
 def echoCallback(update: Update): # Функция отправки окна с сообщением по нажатию кнопки с "callback='echoCallback'"
     print("Funcion 'echoCallback' was colled !")
@@ -186,6 +188,15 @@ def textHandler(update : telegram.update.Update, context): # Функция об
     set_echoInLineButton(update, context)
     set_echoKeyboardButton(update, context)
 
+def photoHandler(update : telegram.update.Update, context): # Функция обработки сообщений с фотографиями
+    global path 
+
+    print("Funcion 'photoHandler' was colled !")
+    logging.info("Funcion 'photoHandler' was colled !")
+
+    file_info = update.message.bot.get_file(update.message.photo[-1].file_id) # Получаем вариант фотографии из сообщения с максимальным разрешением 
+    file_info.download(path + '\download' + f'\{update.message.photo[-1].file_id}.png') # Скачиваем фотографию из сообщения в указанное место
+
 def googleSheets_handler(update):
     print("Funcion 'googleSheets_handler' was colled !")
     logging.info("Funcion 'googleSheets_handler' was colled !")
@@ -202,6 +213,7 @@ def set_commandHandlers(mybot : Updater): # Функция обявляет ру
 
     dp.add_handler(CommandHandler('start', func_start)) # Ручка для команды "/start"
     dp.add_handler(MessageHandler(Filters.text, textHandler)) # Ручка для всего получаемого текста
+    dp.add_handler(MessageHandler(Filters.photo, photoHandler)) # Ручка для всех получаемых фотографий
     dp.add_handler(CallbackQueryHandler(callbackHandler)) # Ручка для обработки различных callback_data
     return dp # Возвращаем диспетчер со всеми "ручками"
 
@@ -211,9 +223,9 @@ def main(strBotToken): # Функция основоного стека вызо
     dp = set_commandHandlers(mybot) # Создаём объект <Диспетчер>
 
     mybot.start_polling() # Бот начинает обращатся к серверу telegram
-
-    print('Bot is alive !') # Выводим в консоль что бот запущен
-    logging.info('Bot is alive !')
+    
+    print("-"*10,'\nBot is alive !') # Выводим в консоль что бот запущен
+    logging.info('"Bot" is alive !')
 
     mybot.idle() # бот работает пока работает хост
     
