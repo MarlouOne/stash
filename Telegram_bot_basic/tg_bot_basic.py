@@ -7,7 +7,7 @@ from pprint import pprint
 
 import logging
 
-logging.basicConfig(filename='./Telegram_bot/bot.log', level=logging.INFO,
+logging.basicConfig(filename='./Telegram_bot_basic/bot.log', level=logging.INFO,
                     format="%(asctime)s %(levelname)s %(message)s" ) # Логгируем ВСЕ сообщения в файл "bot.log" по формату <Врмемя Тип сообщения Сообщение>
 
 import inspect
