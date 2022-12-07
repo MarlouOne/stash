@@ -1,3 +1,4 @@
+## Сообщение в чате
 {
     'message': 
     {
@@ -31,7 +32,7 @@
     },
       'update_id': 504006446
 } 
-
+## Колбэк
 query : {
          'id': '1431112512996587442',
          'data': 'echoCallback',
@@ -85,3 +86,62 @@ query : {
                 'is_bot': False
             }
         }
+
+## Фотография отправленная в чат пользователем 
+{'message': 
+    {'date': 1670443131,
+     'channel_chat_created': False,
+      'chat': 
+      {'type': 'private',
+       'username': 'DailyByCompany',
+        'first_name': 'Бармалей',
+         'id': 333206847
+         },
+          'supergroup_chat_created': False,
+           'group_chat_created': False,
+            'entities': [],
+             'message_id': 737,
+              'delete_chat_photo': False,
+               'photo': 
+               [
+                {'width': 90,
+                 'file_unique_id': 'AQADGb8xG8OsiUh4',
+                  'file_id': 'AgACAgIAAxkBAAIC4WOQ8HsyyXuF_WX3HIRU7jmWzbjPAAIZvzEbw6yJSOipBFkaWa0VAQADAgADcwADKwQ',
+                   'height': 51,
+                    'file_size': 783
+                    },
+                     {
+                        'width': 320,
+                         'file_unique_id': 'AQADGb8xG8OsiUhy',
+                          'file_id': 'AgACAgIAAxkBAAIC4WOQ8HsyyXuF_WX3HIRU7jmWzbjPAAIZvzEbw6yJSOipBFkaWa0VAQADAgADbQADKwQ',
+                           'height': 180,
+                            'file_size': 7301},
+                             {
+                                'width': 800,
+                                 'file_unique_id': 'AQADGb8xG8OsiUh9',
+                                  'file_id': 'AgACAgIAAxkBAAIC4WOQ8HsyyXuF_WX3HIRU7jmWzbjPAAIZvzEbw6yJSOipBFkaWa0VAQADAgADeAADKwQ',
+                                   'height': 450,
+                                    'file_size': 28234
+                                    },
+                                     {
+                                        'width': 1280,
+                                         'file_unique_id': 'AQADGb8xG8OsiUh-',
+                                          'file_id': 'AgACAgIAAxkBAAIC4WOQ8HsyyXuF_WX3HIRU7jmWzbjPAAIZvzEbw6yJSOipBFkaWa0VAQADAgADeQADKwQ',
+                                           'height': 720,
+                                            'file_size': 43134
+                                            }
+                                            ],
+                                             'new_chat_members': [],
+                                              'caption_entities': [],
+                                               'new_chat_photo': [],
+                                                'from': 
+                                                {
+                                                    'is_bot': False,
+                                                     'username': 'DailyByCompany',
+                                                      'first_name': 'Бармалей',
+                                                       'language_code': 'ru',
+                                                        'id': 333206847
+                                                        }
+                                                        },
+                                                         'update_id': 504006708
+                                                         }
