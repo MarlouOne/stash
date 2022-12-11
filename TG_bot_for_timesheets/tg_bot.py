@@ -7,8 +7,8 @@
 import src.settings as settings # Импортируем "защищенный" файл с "важной" информацией
 
 BOT_TOKEN        = settings.API_KEY # Токен из "защищенного" файла settings.py
-DB_PATH          = './src/tg_bot.db'
-CREDENTIALS_FILE = './src/pythonextension-202bab519501.json'  # Файла "pythonextension-202bab519501.json", содержащий закрытый ключ 
+DB_PATH          = './TG_bot_for_timesheets/src/bot.db'
+CREDENTIALS_FILE = './TG_bot_for_timesheets/src/pythonextension-202bab519501.json'  # Файла "pythonextension-202bab519501.json", содержащий закрытый ключ 
 
 
 from pprint import pprint
@@ -16,12 +16,14 @@ import logging
 import inspect
 import sys, os
 
-sys.path.insert(0, os.path.abspath('./')) # Добавляем папку выше уровнем для получения их содержимого 
+# sys.path.insert(0, os.path.abspath('./')) # Добавляем папку выше уровнем для получения их содержимого 
+
+# pprint(sys.path)
 
 import dependence.Google_sheet_extension_v3_in_class as GSE
 import dependence.sqlite_tg_bot as STB
 
-logging.basicConfig(filename='./bot.log', level=logging.INFO,
+logging.basicConfig(filename='./TG_bot_for_timesheets/bot.log', level=logging.INFO,
                     format="%(asctime)s %(levelname)s %(message)s" ) # Логгируем ВСЕ сообщения в файл "bot.log" по формату <Врмемя Тип сообщения Сообщение>
 
 def showVarType(var) -> None: # Узнаём тип данных произвольной переменной
@@ -31,7 +33,7 @@ def showVarType(var) -> None: # Узнаём тип данных произво�
 
 # extention = GSE.extension(CREDENTIALS_FILE=CREDENTIALS_FILE,)
 
-DB_handler = STB.sqlite_handler_tgbot(path=DB_PATH)
+DB_handler = STB.tgbot_db(path=DB_PATH)
 
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update, ReplyKeyboardMarkup, KeyboardButton
 
@@ -40,8 +42,28 @@ import telegram
 # from telegram.ext import *
 
 
+def start(update : telegram.update.Update, context):
+    print("Funcion 'start' was colled !")
+    logging.info("Funcion 'start' was colled !")
+    
+    keyboard = [ [ InlineKeyboardButton('Let`s start !', callback_data='startCallback')] ] # Создаём кнопку с введённым текстом
+    markup = InlineKeyboardMarkup(keyboard) # Создаём разметку с полученной кнопкой
+    update.message.reply_text( text='Bot is online !', reply_markup = markup) # Выводим кнопку в чат 
 
+def login(update : telegram.update.Update, context):
+    print("Funcion 'login' was colled !")
+    logging.info("Funcion 'login' was colled !")
 
+    # showVarType(update)
+    # userInfo = update.message.chat
+
+    if DB_handler.check_userExistence(update) == False:
+        print(f'User with id = {update.callback_query.message.chat.id} not existe')
+        DB_handler.set_newUser(update)
+        print(f'User with id = {update.callback_query.message.chat.id} now in db')
+    else:
+        print(f'User with id = {update.callback_query.message.chat.id} was existe in db')
+# def 
 
 def callbackHandler(update: Update, context): # Функция обработки обаратных запросов (callback_data)
     global path
@@ -51,6 +73,10 @@ def callbackHandler(update: Update, context): # Функция обработк�
     logging.info(f"Query - '{query}' !")
     
     print(f"Query - '{query}' !")
+
+    if query == 'startCallback':
+        login(update, context)
+
 
 def textHandler(update : telegram.update.Update, context): # Функция обработки текстовых сообщений
     print("Funcion 'textHandler' was colled !")
@@ -64,7 +90,7 @@ def photoHandler(update : telegram.update.Update, context): # Функция о�
 def set_commandHandlers(mybot : Updater): # Функция обявляет ручки для диспетчра 
     dp = mybot.dispatcher # Создаём объект <Диспетчер>
 
-    dp.add_handler(CommandHandler('start', func_start)) # Ручка для команды "/start"
+    dp.add_handler(CommandHandler('start', start)) # Ручка для команды "/start"
     dp.add_handler(MessageHandler(Filters.text, textHandler)) # Ручка для всего получаемого текста
     dp.add_handler(MessageHandler(Filters.photo, photoHandler)) # Ручка для всех получаемых фотографий
     dp.add_handler(CallbackQueryHandler(callbackHandler)) # Ручка для обработки различных callback_data

@@ -282,4 +282,4 @@ if __name__ == '__main__': # Если файл tg_bot.py вызаван, то б
     main()
 
 print(f'{__name__} is here !')
-print('Google_sheet_extension_v3_in_class is here !')
+# print('Google_sheet_extension_v3_in_class is here !')
