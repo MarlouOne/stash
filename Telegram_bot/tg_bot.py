@@ -140,7 +140,7 @@ def set_echoKeyboardButton(update : telegram.update.Update, context): # Функ
     print("Funcion 'set_echoKeyboardButton' was colled !")
     logging.info("Funcion 'set_echoKeyboardButton' was colled !")
     keyboard = [ [ KeyboardButton('Case 1'), KeyboardButton('Case 2') ] ] # Создаём кнопку с введённым текстом | Нет параметра "Callback_data" 
-    markup = ReplyKeyboardMarkup(keyboard, resize_keyboard = True, one_time_keyboard = True, input_field_placeholder = "Keyboard :")
+    markup = ReplyKeyboardMarkup(keyboard, resize_keyboard = True, one_time_keyboard = True, input_field_placeholder = "Keyboard :") # Создаём разметку с полученной кнопкой
     update.message.reply_text( text='___', reply_markup = markup)# Выводим кнопку в чат 
     # update.message.bot.delete_message(update.message.chat.id, update.message.message_id)
 
