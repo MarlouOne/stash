@@ -1,179 +1,41 @@
-2022-12-11 19:39:12,946 INFO Scheduler started
-2022-12-11 19:39:13,142 INFO "Bot" is alive !
-2022-12-11 19:39:19,932 INFO Funcion 'callbackHandler' was colled !
-2022-12-11 19:39:19,932 INFO Query - 'startCallback' !
-2022-12-11 19:39:19,932 INFO Funcion 'login' was colled !
-2022-12-11 19:39:19,933 ERROR No error handlers are registered, logging exception.
-Traceback (most recent call last):
-  File "C:\Python311\Lib\site-packages\telegram\ext\dispatcher.py", line 557, in process_update
-    handler.handle_update(update, self, check, context)
-  File "C:\Python311\Lib\site-packages\telegram\ext\handler.py", line 199, in handle_update
-    return self.callback(update, context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "c:\Users\major\Documents\GitHub\stash\TG_bot_for_timesheets\tg_bot.py", line 75, in callbackHandler
-    login(update, context)
-  File "c:\Users\major\Documents\GitHub\stash\TG_bot_for_timesheets\tg_bot.py", line 60, in login
-    if DB_handler.check_userExistence(update) == False:
-       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "c:\Users\major\Documents\GitHub\stash\TG_bot_for_timesheets\dependence\sqlite_tg_bot.py", line 41, in check_userExistence
-    result =  self.selectFromWhere(coloms='user_id', table_name="users", condition=condition)
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "c:\Users\major\Documents\GitHub\stash\TG_bot_for_timesheets\dependence\sqlite_handler.py", line 37, in selectFromWhere
-    sql_cursor = self.sql_connection.cursor()
-                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-sqlite3.ProgrammingError: SQLite objects created in a thread can only be used in that same thread. The object was created in thread id 5540 and this is thread id 14332.
-2022-12-11 19:40:51,861 INFO Scheduler started
-2022-12-11 19:40:52,071 INFO "Bot" is alive !
-2022-12-11 19:40:53,374 INFO Funcion 'callbackHandler' was colled !
-2022-12-11 19:40:53,374 INFO Query - 'startCallback' !
-2022-12-11 19:40:53,374 INFO Funcion 'login' was colled !
-2022-12-11 19:43:30,117 INFO Scheduler started
-2022-12-11 19:43:30,317 INFO "Bot" is alive !
-2022-12-11 19:43:33,156 INFO Funcion 'callbackHandler' was colled !
-2022-12-11 19:43:33,157 INFO Query - 'startCallback' !
-2022-12-11 19:43:33,157 INFO Funcion 'login' was colled !
-2022-12-11 19:44:10,512 INFO Scheduler started
-2022-12-11 19:44:10,719 INFO "Bot" is alive !
-2022-12-11 19:44:13,879 INFO Funcion 'callbackHandler' was colled !
-2022-12-11 19:44:13,879 INFO Query - 'startCallback' !
-2022-12-11 19:44:13,880 INFO Funcion 'login' was colled !
-2022-12-11 19:45:24,492 INFO Scheduler started
-2022-12-11 19:45:24,674 INFO "Bot" is alive !
-2022-12-11 19:46:02,751 INFO Scheduler started
-2022-12-11 19:46:02,936 INFO "Bot" is alive !
-2022-12-11 19:46:35,016 INFO Funcion 'callbackHandler' was colled !
-2022-12-11 19:46:35,016 INFO Query - 'startCallback' !
-2022-12-11 19:46:35,016 INFO Funcion 'login' was colled !
-2022-12-11 19:46:35,017 ERROR No error handlers are registered, logging exception.
-Traceback (most recent call last):
-  File "C:\Python311\Lib\site-packages\telegram\ext\dispatcher.py", line 557, in process_update
-    handler.handle_update(update, self, check, context)
-  File "C:\Python311\Lib\site-packages\telegram\ext\handler.py", line 199, in handle_update
-    return self.callback(update, context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "c:\Users\major\Documents\GitHub\stash\TG_bot_for_timesheets\tg_bot.py", line 76, in callbackHandler
-    login(update, context)
-  File "c:\Users\major\Documents\GitHub\stash\TG_bot_for_timesheets\tg_bot.py", line 62, in login
-    DB_handler.set_newUser(update)
-  File "c:\Users\major\Documents\GitHub\stash\TG_bot_for_timesheets\dependence\sqlite_tg_bot.py", line 25, in set_newUser
-    self.insert(table_name='user',coloms='user_id, user_fname', values=values)
-  File "c:\Users\major\Documents\GitHub\stash\TG_bot_for_timesheets\dependence\sqlite_handler.py", line 20, in insert
-    sql_cursor.execute(sqlite_insert_query)
-sqlite3.OperationalError: no such table: user
-2022-12-11 19:47:05,645 INFO Scheduler started
-2022-12-11 19:47:05,862 INFO "Bot" is alive !
-2022-12-11 19:47:07,668 INFO Funcion 'callbackHandler' was colled !
-2022-12-11 19:47:07,668 INFO Query - 'startCallback' !
-2022-12-11 19:47:07,668 INFO Funcion 'login' was colled !
-2022-12-11 19:49:19,071 INFO Scheduler started
-2022-12-11 19:49:19,319 INFO "Bot" is alive !
-2022-12-11 19:49:21,072 INFO Funcion 'callbackHandler' was colled !
-2022-12-11 19:49:21,072 INFO Query - 'startCallback' !
-2022-12-11 19:49:21,072 INFO Funcion 'login' was colled !
-2022-12-11 19:51:40,814 INFO Scheduler started
-2022-12-11 19:51:41,060 INFO "Bot" is alive !
-2022-12-11 19:51:41,112 INFO Funcion 'callbackHandler' was colled !
-2022-12-11 19:51:41,113 INFO Query - 'startCallback' !
-2022-12-11 19:51:41,113 INFO Funcion 'login' was colled !
-2022-12-11 19:53:34,364 INFO Scheduler started
-2022-12-11 19:53:34,591 INFO "Bot" is alive !
-2022-12-11 19:53:44,571 INFO Scheduler started
-2022-12-11 19:53:44,798 INFO "Bot" is alive !
-2022-12-11 19:54:10,702 INFO Funcion 'callbackHandler' was colled !
-2022-12-11 19:54:10,702 INFO Query - 'startCallback' !
-2022-12-11 19:54:10,703 INFO Funcion 'login' was colled !
-2022-12-11 19:59:13,463 INFO Scheduler started
-2022-12-11 19:59:13,707 INFO "Bot" is alive !
-2022-12-11 19:59:17,266 INFO Funcion 'callbackHandler' was colled !
-2022-12-11 19:59:17,266 INFO Query - 'startCallback' !
-2022-12-11 19:59:17,266 INFO Funcion 'login' was colled !
-2022-12-11 19:59:50,551 INFO Scheduler started
-2022-12-11 19:59:50,770 INFO "Bot" is alive !
-2022-12-11 19:59:52,533 INFO Funcion 'callbackHandler' was colled !
-2022-12-11 19:59:52,533 INFO Query - 'startCallback' !
-2022-12-11 19:59:52,533 INFO Funcion 'login' was colled !
-2022-12-11 20:00:42,413 INFO Scheduler started
-2022-12-11 20:00:42,769 INFO "Bot" is alive !
-2022-12-11 20:00:44,818 INFO Funcion 'callbackHandler' was colled !
-2022-12-11 20:00:44,818 INFO Query - 'startCallback' !
-2022-12-11 20:00:44,819 INFO Funcion 'login' was colled !
-2022-12-11 20:01:04,696 INFO Scheduler started
-2022-12-11 20:01:04,957 INFO "Bot" is alive !
-2022-12-11 20:01:07,178 INFO Funcion 'callbackHandler' was colled !
-2022-12-11 20:01:07,178 INFO Query - 'startCallback' !
-2022-12-11 20:01:07,179 INFO Funcion 'login' was colled !
-2022-12-11 20:01:51,471 INFO Scheduler started
-2022-12-11 20:01:51,703 INFO "Bot" is alive !
-2022-12-11 20:01:53,589 INFO Funcion 'callbackHandler' was colled !
-2022-12-11 20:01:53,589 INFO Query - 'startCallback' !
-2022-12-11 20:01:53,590 INFO Funcion 'login' was colled !
-2022-12-11 20:02:11,480 INFO Scheduler started
-2022-12-11 20:02:11,689 INFO "Bot" is alive !
-2022-12-11 20:02:14,354 INFO Funcion 'callbackHandler' was colled !
-2022-12-11 20:02:14,354 INFO Query - 'startCallback' !
-2022-12-11 20:02:14,355 INFO Funcion 'login' was colled !
-2022-12-11 20:05:41,048 INFO Scheduler started
-2022-12-11 20:05:41,303 INFO "Bot" is alive !
-2022-12-11 20:05:45,355 INFO Funcion 'callbackHandler' was colled !
-2022-12-11 20:05:45,355 INFO Query - 'startCallback' !
-2022-12-11 20:05:45,357 INFO Funcion 'login' was colled !
-2022-12-11 20:07:36,684 INFO Scheduler started
-2022-12-11 20:07:36,913 INFO "Bot" is alive !
-2022-12-11 20:07:38,631 INFO Funcion 'callbackHandler' was colled !
-2022-12-11 20:07:38,631 INFO Query - 'startCallback' !
-2022-12-11 20:07:38,632 INFO Funcion 'login' was colled !
-2022-12-11 20:08:29,379 INFO Scheduler started
-2022-12-11 20:08:29,619 INFO "Bot" is alive !
-2022-12-11 20:08:31,226 INFO Funcion 'callbackHandler' was colled !
-2022-12-11 20:08:31,226 INFO Query - 'startCallback' !
-2022-12-11 20:08:31,227 INFO Funcion 'login' was colled !
-2022-12-11 20:09:49,586 INFO Scheduler started
-2022-12-11 20:09:49,778 INFO "Bot" is alive !
-2022-12-11 20:09:53,476 INFO Funcion 'callbackHandler' was colled !
-2022-12-11 20:09:53,476 INFO Query - 'startCallback' !
-2022-12-11 20:09:53,477 INFO Funcion 'login' was colled !
-2022-12-11 20:10:12,065 INFO Scheduler started
-2022-12-11 20:10:12,295 INFO "Bot" is alive !
-2022-12-11 20:10:13,820 INFO Funcion 'callbackHandler' was colled !
-2022-12-11 20:10:13,820 INFO Query - 'startCallback' !
-2022-12-11 20:10:13,821 INFO Funcion 'login' was colled !
-2022-12-11 20:10:26,373 INFO Funcion 'callbackHandler' was colled !
-2022-12-11 20:10:26,374 INFO Query - 'startCallback' !
-2022-12-11 20:10:26,374 INFO Funcion 'login' was colled !
-2022-12-11 20:13:00,344 INFO Scheduler started
-2022-12-11 20:13:00,551 INFO "Bot" is alive !
-2022-12-11 20:13:13,194 INFO Funcion 'callbackHandler' was colled !
-2022-12-11 20:13:13,194 INFO Query - 'startCallback' !
-2022-12-11 20:13:13,195 INFO Funcion 'login' was colled !
-2022-12-11 20:13:18,785 ERROR No error handlers are registered, logging exception.
-Traceback (most recent call last):
-  File "c:\Users\major\Documents\GitHub\stash\TG_bot_for_timesheets\dependence\sqlite_tg_bot.py", line 26, in set_newUser
-    self.insert(table_name='users',coloms='user_id, user_fname', values=values)
-  File "c:\Users\major\Documents\GitHub\stash\TG_bot_for_timesheets\dependence\sqlite_handler.py", line 26, in insert
-    sql_cursor.execute(sqlite_insert_query)
-sqlite3.OperationalError: database is locked
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "C:\Python311\Lib\site-packages\telegram\ext\dispatcher.py", line 557, in process_update
-    handler.handle_update(update, self, check, context)
-  File "C:\Python311\Lib\site-packages\telegram\ext\handler.py", line 199, in handle_update
-    return self.callback(update, context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "c:\Users\major\Documents\GitHub\stash\TG_bot_for_timesheets\tg_bot.py", line 78, in callbackHandler
-    login(update, context)
-  File "c:\Users\major\Documents\GitHub\stash\TG_bot_for_timesheets\tg_bot.py", line 62, in login
-    DB_handler.set_newUser(update)
-  File "c:\Users\major\Documents\GitHub\stash\TG_bot_for_timesheets\dependence\sqlite_tg_bot.py", line 28, in set_newUser
-    update.message.reply_text( text='Something gone wrong !')
-    ^^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'NoneType' object has no attribute 'reply_text'
-2022-12-11 20:13:54,685 INFO Scheduler started
-2022-12-11 20:13:54,906 INFO "Bot" is alive !
-2022-12-11 20:14:01,666 INFO Funcion 'callbackHandler' was colled !
-2022-12-11 20:14:01,667 INFO Query - 'startCallback' !
-2022-12-11 20:14:01,667 INFO Funcion 'login' was colled !
-2022-12-11 20:14:18,565 INFO Funcion 'callbackHandler' was colled !
-2022-12-11 20:14:18,565 INFO Query - 'startCallback' !
-2022-12-11 20:14:18,566 INFO Funcion 'login' was colled !
+2022-12-11 20:17:35,412 INFO Scheduler started
+2022-12-11 20:17:35,645 INFO "Bot" is alive !
+2022-12-11 20:17:36,724 INFO Funcion 'callbackHandler' was colled !
+2022-12-11 20:17:36,725 INFO Query - 'startCallback' !
+2022-12-11 20:17:36,725 INFO Funcion 'login' was colled !
+2022-12-11 20:17:48,903 INFO Funcion 'callbackHandler' was colled !
+2022-12-11 20:17:48,903 INFO Query - 'startCallback' !
+2022-12-11 20:17:48,904 INFO Funcion 'login' was colled !
+2022-12-11 20:18:05,057 INFO Scheduler started
+2022-12-11 20:18:05,327 INFO "Bot" is alive !
+2022-12-11 20:18:07,134 INFO Funcion 'callbackHandler' was colled !
+2022-12-11 20:18:07,134 INFO Query - 'startCallback' !
+2022-12-11 20:18:07,135 INFO Funcion 'login' was colled !
+2022-12-11 20:18:26,669 INFO Scheduler started
+2022-12-11 20:18:26,923 INFO "Bot" is alive !
+2022-12-11 20:18:32,430 INFO Funcion 'callbackHandler' was colled !
+2022-12-11 20:18:32,430 INFO Query - 'startCallback' !
+2022-12-11 20:18:32,430 INFO Funcion 'login' was colled !
+2022-12-11 20:19:17,585 INFO Scheduler started
+2022-12-11 20:19:17,788 INFO "Bot" is alive !
+2022-12-11 20:19:19,083 INFO Funcion 'callbackHandler' was colled !
+2022-12-11 20:19:19,083 INFO Query - 'startCallback' !
+2022-12-11 20:19:19,084 INFO Funcion 'login' was colled !
+2022-12-11 20:19:52,286 INFO Scheduler started
+2022-12-11 20:19:52,518 INFO "Bot" is alive !
+2022-12-11 20:19:55,432 INFO Funcion 'callbackHandler' was colled !
+2022-12-11 20:19:55,433 INFO Query - 'startCallback' !
+2022-12-11 20:19:55,434 INFO Funcion 'login' was colled !
+2022-12-11 20:21:14,704 INFO Scheduler started
+2022-12-11 20:21:14,917 INFO "Bot" is alive !
+2022-12-11 20:21:17,238 INFO Funcion 'callbackHandler' was colled !
+2022-12-11 20:21:17,238 INFO Query - 'startCallback' !
+2022-12-11 20:21:17,239 INFO Funcion 'login' was colled !
+2022-12-11 20:21:45,116 INFO Scheduler started
+2022-12-11 20:21:45,340 INFO "Bot" is alive !
+2022-12-11 20:21:58,394 INFO Funcion 'callbackHandler' was colled !
+2022-12-11 20:21:58,394 INFO Query - 'startCallback' !
+2022-12-11 20:21:58,395 INFO Funcion 'login' was colled !
+2022-12-11 20:22:03,591 INFO Funcion 'callbackHandler' was colled !
+2022-12-11 20:22:03,591 INFO Query - 'startCallback' !
+2022-12-11 20:22:03,592 INFO Funcion 'login' was colled !

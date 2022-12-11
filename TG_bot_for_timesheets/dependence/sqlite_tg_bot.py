@@ -42,8 +42,6 @@ class tgbot_db(lite.handler):
         # self.sql_cursor.execute(f'SELECT {coloms} FROM {table_name} WHERE {condition}')
         condition = f"user_id = {userID}"
         result =  self.selectFromWhere(coloms='user_id', table_name="users", condition=condition)
-        # print(result, len(result))
-
         
         return (len(result) != 0)
 

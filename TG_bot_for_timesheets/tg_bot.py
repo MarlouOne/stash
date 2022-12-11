@@ -61,9 +61,15 @@ def login(update : telegram.update.Update, context):
         print(f'User with id = {update.callback_query.message.chat.id} not existe')
         DB_handler.set_newUser(update)
         print(f'User with id = {update.callback_query.message.chat.id} now in db')
+
     else:
         print(f'User with id = {update.callback_query.message.chat.id} was existe in db')
-# def 
+        markup = ReplyKeyboardMarkup(input_field_placeholder = "Write your Google Sheet ID here:")
+        update.callback_query.message.reply_text(text='Looks like you already was here. \n Please enter your Google sheet ID !', reply_markup = markup)
+        
+
+
+
 
 def callbackHandler(update: Update, context): # Функция обработки обаратных запросов (callback_data)
     global path
