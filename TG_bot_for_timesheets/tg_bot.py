@@ -3,10 +3,11 @@
 
 # t.me/Small_test_project_bot
 
+
 import src.settings as settings # Импортируем "защищенный" файл с "важной" информацией
 
 BOT_TOKEN        = settings.API_KEY # Токен из "защищенного" файла settings.py
-DB_PATH          = './src/th_bot.db'
+DB_PATH          = './src/tg_bot.db'
 CREDENTIALS_FILE = './src/pythonextension-202bab519501.json'  # Файла "pythonextension-202bab519501.json", содержащий закрытый ключ 
 
 
@@ -15,8 +16,10 @@ import logging
 import inspect
 import sys, os
 
-from dependence import Google_sheet_extension_v3_in_class as GSE
-from dependence import sqlite_tg_bot as STB
+sys.path.insert(0, os.path.abspath('./')) # Добавляем папку выше уровнем для получения их содержимого 
+
+import dependence.Google_sheet_extension_v3_in_class as GSE
+import dependence.sqlite_tg_bot as STB
 
 logging.basicConfig(filename='./bot.log', level=logging.INFO,
                     format="%(asctime)s %(levelname)s %(message)s" ) # Логгируем ВСЕ сообщения в файл "bot.log" по формату <Врмемя Тип сообщения Сообщение>
@@ -26,11 +29,9 @@ def showVarType(var) -> None: # Узнаём тип данных произво�
     varName = [name for name, value in caller_locals.items() if var is value] # Получаем имя переменной 
     print(var, f'\n{varName} type is {type(var)}') # Узнаём тип данных переменной 
 
+# extention = GSE.extension(CREDENTIALS_FILE=CREDENTIALS_FILE,)
 
-
-
-
-
+DB_handler = STB.sqlite_handler_tgbot(path=DB_PATH)
 
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update, ReplyKeyboardMarkup, KeyboardButton
 

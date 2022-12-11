@@ -1,6 +1,6 @@
 import sqlite3
 
-class sqlite_handler():
+class handler():
     sql_connection = sqlite3.Connection
     sql_cursor = sqlite3.Cursor
 
@@ -37,4 +37,12 @@ class sqlite_handler():
         [print(row) for row in self.sql_cursor.fetchall()]
         
         return self.sql_cursor.fetchall()
-    
+
+def main():
+    DB_PATH          = 'tg_bot.db'
+    obj = handler(DB_PATH)
+
+if __name__ == '__main__': # Если файл tg_bot.py вызаван, то будет запущен main(strBotToken); Если он будет импортироват то ничего не произайдёт
+    main()
+
+print(f'{__name__} is here !')

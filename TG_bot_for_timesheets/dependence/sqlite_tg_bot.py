@@ -3,11 +3,11 @@ import os, sys
 # sys.path.insert(0, os.path.abspath('./')) # Добавляем папку выше уровнем для получения содержимого папки Google_sheets_extension
 # import SQLite.sqlite
 
-import sqlite_handler
+import sqlite_handler as sqlite
 
 import telegram
 
-class sqlite_handler_tgbot(sqlite_handler.sqlite_handler):
+class tgbot_db(sqlite.handler):
     def __init__(self, path) -> None:
         super().__init__(path)
 
@@ -32,3 +32,11 @@ class sqlite_handler_tgbot(sqlite_handler.sqlite_handler):
         except Exception:
             update.message.reply_text( text='Something gone wrong !') 
 
+def main():
+    DB_PATH          = 'tg_bot.db'
+    obj = tgbot_db(DB_PATH)
+
+if __name__ == '__main__': # Если файл tg_bot.py вызаван, то будет запущен main(strBotToken); Если он будет импортироват то ничего не произайдёт
+    main()
+
+print(f'{__name__} is here !')
