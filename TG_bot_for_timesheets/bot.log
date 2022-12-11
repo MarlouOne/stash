@@ -127,3 +127,53 @@ sqlite3.OperationalError: no such table: user
 2022-12-11 20:08:31,226 INFO Funcion 'callbackHandler' was colled !
 2022-12-11 20:08:31,226 INFO Query - 'startCallback' !
 2022-12-11 20:08:31,227 INFO Funcion 'login' was colled !
+2022-12-11 20:09:49,586 INFO Scheduler started
+2022-12-11 20:09:49,778 INFO "Bot" is alive !
+2022-12-11 20:09:53,476 INFO Funcion 'callbackHandler' was colled !
+2022-12-11 20:09:53,476 INFO Query - 'startCallback' !
+2022-12-11 20:09:53,477 INFO Funcion 'login' was colled !
+2022-12-11 20:10:12,065 INFO Scheduler started
+2022-12-11 20:10:12,295 INFO "Bot" is alive !
+2022-12-11 20:10:13,820 INFO Funcion 'callbackHandler' was colled !
+2022-12-11 20:10:13,820 INFO Query - 'startCallback' !
+2022-12-11 20:10:13,821 INFO Funcion 'login' was colled !
+2022-12-11 20:10:26,373 INFO Funcion 'callbackHandler' was colled !
+2022-12-11 20:10:26,374 INFO Query - 'startCallback' !
+2022-12-11 20:10:26,374 INFO Funcion 'login' was colled !
+2022-12-11 20:13:00,344 INFO Scheduler started
+2022-12-11 20:13:00,551 INFO "Bot" is alive !
+2022-12-11 20:13:13,194 INFO Funcion 'callbackHandler' was colled !
+2022-12-11 20:13:13,194 INFO Query - 'startCallback' !
+2022-12-11 20:13:13,195 INFO Funcion 'login' was colled !
+2022-12-11 20:13:18,785 ERROR No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "c:\Users\major\Documents\GitHub\stash\TG_bot_for_timesheets\dependence\sqlite_tg_bot.py", line 26, in set_newUser
+    self.insert(table_name='users',coloms='user_id, user_fname', values=values)
+  File "c:\Users\major\Documents\GitHub\stash\TG_bot_for_timesheets\dependence\sqlite_handler.py", line 26, in insert
+    sql_cursor.execute(sqlite_insert_query)
+sqlite3.OperationalError: database is locked
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Python311\Lib\site-packages\telegram\ext\dispatcher.py", line 557, in process_update
+    handler.handle_update(update, self, check, context)
+  File "C:\Python311\Lib\site-packages\telegram\ext\handler.py", line 199, in handle_update
+    return self.callback(update, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\major\Documents\GitHub\stash\TG_bot_for_timesheets\tg_bot.py", line 78, in callbackHandler
+    login(update, context)
+  File "c:\Users\major\Documents\GitHub\stash\TG_bot_for_timesheets\tg_bot.py", line 62, in login
+    DB_handler.set_newUser(update)
+  File "c:\Users\major\Documents\GitHub\stash\TG_bot_for_timesheets\dependence\sqlite_tg_bot.py", line 28, in set_newUser
+    update.message.reply_text( text='Something gone wrong !')
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'reply_text'
+2022-12-11 20:13:54,685 INFO Scheduler started
+2022-12-11 20:13:54,906 INFO "Bot" is alive !
+2022-12-11 20:14:01,666 INFO Funcion 'callbackHandler' was colled !
+2022-12-11 20:14:01,667 INFO Query - 'startCallback' !
+2022-12-11 20:14:01,667 INFO Funcion 'login' was colled !
+2022-12-11 20:14:18,565 INFO Funcion 'callbackHandler' was colled !
+2022-12-11 20:14:18,565 INFO Query - 'startCallback' !
+2022-12-11 20:14:18,566 INFO Funcion 'login' was colled !

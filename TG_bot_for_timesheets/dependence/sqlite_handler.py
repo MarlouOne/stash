@@ -1,5 +1,6 @@
 import sqlite3
 import inspect
+import pprint
 
 def showVarType(var) -> None: # Узнаём тип данных произвольной переменной
     caller_locals = inspect.currentframe().f_back.f_locals
@@ -35,17 +36,15 @@ class handler():
         sql_cursor = self.sql_connection.cursor()
         sql_cursor.execute(f'SELECT {coloms} FROM {table_name}')
 
-        [print(row) for row in sql_cursor.fetchall()]
-        
-        a = sql_cursor.fetchall()
+        # pprint(sql_cursor.fetchall()) # Вывод результата
 
         return sql_cursor.fetchall()
 
     def selectFromWhere(self, table_name, coloms, condition):
         sql_cursor = self.sql_connection.cursor()
         sql_cursor.execute(f'SELECT {coloms} FROM {table_name} WHERE {condition}')
-
-        [print(row) for row in sql_cursor.fetchall()]
+        
+        # pprint(sql_cursor.fetchall()) # Вывод результата
         
         return sql_cursor.fetchall()
 
