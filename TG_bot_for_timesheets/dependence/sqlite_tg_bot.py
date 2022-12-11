@@ -1,13 +1,15 @@
 import os, sys
 
 # sys.path.insert(0, os.path.abspath('./')) # Добавляем папку выше уровнем для получения содержимого папки Google_sheets_extension
-# import SQLite.sqlite
 
-import sqlite_handler as sqlite
+
+# print(sys.path)
+
+import dependence.sqlite_handler as lite
 
 import telegram
 
-class tgbot_db(sqlite.handler):
+class tgbot_db(lite.handler):
     def __init__(self, path) -> None:
         super().__init__(path)
 
