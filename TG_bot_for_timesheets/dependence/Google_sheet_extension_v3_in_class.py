@@ -261,7 +261,7 @@ class extension(): # Класс отвечающий за работу с google
 
 
 
-def main():
+def main(): # Пример работы с расширением
     CREDENTIALS_FILE = 'pythonextension-202bab519501.json'  # Имя файла с закрытым ключом, вы должны подставить свое
     sheet_id = '1s7CcKw-uDbmjeSDgiB_jQQ2CwYq3t14k0Y_3kxO2KqA' # ID нужной нам Google sheet    # https://docs.google.com/spreadsheets/d/1s7CcKw-uDbmjeSDgiB_jQQ2CwYq3t14k0Y_3kxO2KqA/edit#gid=937792580
 

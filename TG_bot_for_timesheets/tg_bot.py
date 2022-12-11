@@ -39,54 +39,88 @@ from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update, ReplyKe
 
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackQueryHandler
 import telegram
-# from telegram.ext import *
+import telegram.ext
 
 
-def start(update : telegram.update.Update, context):
+def start(update : telegram.update.Update, context : telegram.ext.callbackcontext.CallbackContext):
+
     print("Funcion 'start' was colled !")
     logging.info("Funcion 'start' was colled !")
     
     keyboard = [ [ InlineKeyboardButton('Let`s start !', callback_data='startCallback')] ] # Создаём кнопку с введённым текстом
     markup = InlineKeyboardMarkup(keyboard) # Создаём разметку с полученной кнопкой
     update.message.reply_text( text='Bot is online !', reply_markup = markup) # Выводим кнопку в чат 
+    context.user_data['status'] = 'Free' # Записываем сосояние без конкретной привязки к действиям пользователя 
+    print(f'Context -', context.user_data['status'])
 
-def login(update : telegram.update.Update, context):
+def login(update : telegram.update.Update, context : telegram.ext.callbackcontext.CallbackContext):
+
     print("Funcion 'login' was colled !")
     logging.info("Funcion 'login' was colled !")
+
+    print(context.user_data['status'])
 
     # showVarType(update)
     # userInfo = update.message.chat
 
-    if DB_handler.check_userExistence(update) == False:
+    if DB_handler.check_userExistence(update) == False: # Проверяем есть ли такой пользователь в базе данных
         print(f'User with id = {update.callback_query.message.chat.id} not existe')
         DB_handler.set_newUser(update)
         print(f'User with id = {update.callback_query.message.chat.id} now in db')
 
-    else:
+        set_GoogleSheetID(update, context)
+    else: # Такой пользователь уже есть
         print(f'User with id = {update.callback_query.message.chat.id} was existe in db')
-        markup = ReplyKeyboardMarkup(input_field_placeholder = "Write your Google Sheet ID here:")
-        update.callback_query.message.reply_text(text='Looks like you already was here. \n Please enter your Google sheet ID !', reply_markup = markup)
-        
+    
+        keyboard = [ [ InlineKeyboardButton('Yes', callback_data='set_GoogleSheetID'),  InlineKeyboardButton('No', callback_data='use_extention')] ] # Создаём кнопку с введённым текстом
+        markup = InlineKeyboardMarkup(keyboard) # Создаём разметку с полученной кнопкой
+        update.callback_query.message.reply_text( text='Do you want to change your Google Sheet ID ?', reply_markup = markup) # Выводим кнопку в чат 
+    
+        # update.callback_query.message.reply_text(text='Looks like you already was here. \n Please enter your Google sheet ID !', reply_markup = markup )
+
+def set_GoogleSheetID(update : telegram.update.Update, context : telegram.ext.callbackcontext.CallbackContext): # Записываем новую ссылку на Google Sheet
+    print("Funcion 'set_GoogleSheetID' was colled !")
+    logging.info("Funcion 'set_GoogleSheetID' was colled !")
+
+    context.user_data['status'] = 'set_GoogleSheetID' # Записываем сосояние ожидания ввода Google Sheet ID
+    old_ID = str(DB_handler.get_userSheetId(update)[0][0])
+    keyboard = [ [ KeyboardButton(old_ID) ] ] # Создаём кнопку с введённым текстом | Нет параметра "Callback_data" 
+    markup = ReplyKeyboardMarkup(keyboard, resize_keyboard = True, one_time_keyboard = True, input_field_placeholder = "Enter your Google sheet ID here:") # Создаём разметку с полученной кнопкой
+    update.callback_query.message.reply_text( text='Looks like you already was here. \n Please enter your Google sheet ID !', reply_markup = markup) # Выводим кнопку в чат 
+    # showVarType(old_ID)
+
+def insert_Google_Sheet_ID(update: Update, context : telegram.ext.callbackcontext.CallbackContext):
+    print(f"Funcion 'textHandler' was colled with context status {context.user_data['status']} !")
+    logging.info(f"Funcion 'textHandler' was colled with context status {context.user_data['status']}
+
+    DB_handler.set_userSheetId(update)
+    context.user_data['status'] = 'Free' # Записываем сосояние без конкретной привязки к действиям пользователя 
 
 
-
-
-def callbackHandler(update: Update, context): # Функция обработки обаратных запросов (callback_data)
+def callbackHandler(update: Update, context : telegram.ext.callbackcontext.CallbackContext): # Функция обработки обаратных запросов (callback_data)
     global path
     print("Funcion 'callbackHandler' was colled !")
     logging.info("Funcion 'callbackHandler' was colled !")
     query = update.callback_query.data # Вычленяем обаратный запрос (callback_data)
     logging.info(f"Query - '{query}' !")
     
+    # showVarType(context)
+
     print(f"Query - '{query}' !")
 
     if query == 'startCallback':
         login(update, context)
+    elif query == 'set_GoogleSheetID':
+        set_GoogleSheetID(update, context)
 
+def textHandler(update : telegram.update.Update, context : telegram.ext.callbackcontext.CallbackContext): # Функция обработки текстовых сообщений
+    status = context.user_data['status']
+    print(f"Funcion 'textHandler' was colled with context status {context.user_data['status']} !")
+    logging.info(f"Funcion 'textHandler' was colled with context status {context.user_data['status']} !")
 
-def textHandler(update : telegram.update.Update, context): # Функция обработки текстовых сообщений
-    print("Funcion 'textHandler' was colled !")
-    logging.info("Funcion 'textHandler' was colled !")
+    if status == 'waitForGoogle_Sheet_ID':
+        insert_Google_Sheet_ID(update, context)
+    
 
 def photoHandler(update : telegram.update.Update, context): # Функция обработки сообщений с фотографиями
     global path 

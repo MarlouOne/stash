@@ -27,15 +27,25 @@ class tgbot_db(lite.handler):
         except Exception:
             update.message.reply_text( text='Something gone wrong !') 
 
+    def get_userSheetId(self, update : telegram.update.Update):
+        userID = update.callback_query.message.chat.id # Работает. Возвращает содержимое словаря "chat" -> id , first_name, type, username
+        condition = f"user_id = {userID}"
+        result =  self.selectFromWhere(coloms='user_sheet_id', table_name="users", condition=condition)
+        # print(result)
+        return result
+
     def set_userSheetId(self, update : telegram.update.Update):
         #  self.sql_cursor.execute(f'UPDATE {table_name} SET {colom} = {value} where {condition}')
         userInfo = update.message.chat # Работает. Возвращает содержимое словаря "chat" -> id , first_name, type, username
         
         condition = f"user_id = {userInfo.id}"
-        try:
-            self.updata(table_name='users', colom='user_sheet_id', value=int(update.message.text), condition=condition)
-        except Exception:
-            update.message.reply_text( text='Something gone wrong !') 
+        # try:
+        self.updata(table_name='users', colom='user_sheet_id', value = update.message.text, condition=condition)
+        replyText = f'Your Google sheet ID is {update.message.text}'
+        update.message.reply_text( text= replyText) 
+        print(replyText)
+        # except Exception:
+        #     update.message.reply_text( text='Something gone wrong !') 
     
     def check_userExistence(self, update : telegram.update.Update) -> bool: # Функция проверки существования записи о пользоавтеле. Если он сущетвует 1, иначе 0
         userID = update.callback_query.message.chat.id # Работает. Возвращает содержимое словаря "chat" -> id , first_name, type, username
