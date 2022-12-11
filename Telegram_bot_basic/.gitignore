@@ -1,7 +1,0 @@
-settings.py
-__pycache__/
-*.log
-*.txt
-src/*.png
-src/*.jpg
-src/download/*
