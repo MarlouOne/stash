@@ -89,15 +89,15 @@ def set_GoogleSheetID(update : telegram.update.Update, context : telegram.ext.ca
     update.callback_query.message.reply_text( text='Looks like you already was here. \n Please enter your Google sheet ID !', reply_markup = markup) # Выводим кнопку в чат 
     # showVarType(old_ID)
 
-def insert_Google_Sheet_ID(update: Update, context : telegram.ext.callbackcontext.CallbackContext):
+def insert_Google_Sheet_ID(update : telegram.update.Update, context : telegram.ext.callbackcontext.CallbackContext):
     print(f"Funcion 'textHandler' was colled with context status {context.user_data['status']} !")
-    logging.info(f"Funcion 'textHandler' was colled with context status {context.user_data['status']}
+    logging.info(f"Funcion 'textHandler' was colled with context status {context.user_data['status']}")
 
     DB_handler.set_userSheetId(update)
     context.user_data['status'] = 'Free' # Записываем сосояние без конкретной привязки к действиям пользователя 
 
 
-def callbackHandler(update: Update, context : telegram.ext.callbackcontext.CallbackContext): # Функция обработки обаратных запросов (callback_data)
+def callbackHandler(update : telegram.update.Update, context : telegram.ext.callbackcontext.CallbackContext): # Функция обработки обаратных запросов (callback_data)
     global path
     print("Funcion 'callbackHandler' was colled !")
     logging.info("Funcion 'callbackHandler' was colled !")
@@ -114,11 +114,18 @@ def callbackHandler(update: Update, context : telegram.ext.callbackcontext.Callb
         set_GoogleSheetID(update, context)
 
 def textHandler(update : telegram.update.Update, context : telegram.ext.callbackcontext.CallbackContext): # Функция обработки текстовых сообщений
-    status = context.user_data['status']
-    print(f"Funcion 'textHandler' was colled with context status {context.user_data['status']} !")
-    logging.info(f"Funcion 'textHandler' was colled with context status {context.user_data['status']} !")
 
-    if status == 'waitForGoogle_Sheet_ID':
+    
+    print(f"Funcion 'textHandler' was colled with context status {context.user_data} !")
+    logging.info(f"Funcion 'textHandler' was colled with context status {context.user_data} !")
+
+  
+    status = context.user_data['status']
+    print(status == 'set_GoogleSheetID')
+    showVarType(status)
+
+    if status == 'set_GoogleSheetID':
+        print("Go to insert_Google_Sheet_ID !")
         insert_Google_Sheet_ID(update, context)
     
 

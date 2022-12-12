@@ -40,7 +40,11 @@ class tgbot_db(lite.handler):
         
         condition = f"user_id = {userInfo.id}"
         # try:
-        self.updata(table_name='users', colom='user_sheet_id', value = update.message.text, condition=condition)
+        # print(f"UPDATE users SET user_sheet_id = '{update.message.text}' where {condition}")
+        self.updata(table_name='users', colom='user_sheet_id', value = f"'{update.message.text}'", condition=condition)
+
+        
+
         replyText = f'Your Google sheet ID is {update.message.text}'
         update.message.reply_text( text= replyText) 
         print(replyText)
