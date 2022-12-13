@@ -34,7 +34,8 @@ class extension(): # Класс отвечающий за работу с google
     service          : build # Служба для работы с таблицей
     sheet            : build # Все листы в таблице
     sheet_id         : str  # ID нужной нам Google sheet
-    
+    # status           : bool
+
     def __init__(self, CREDENTIALS_FILE, sheet_id) -> None:
         try:
             self.CREDENTIALS_FILE = CREDENTIALS_FILE  # Имя файла с закрытым ключом, вы должны подставить свое
@@ -43,8 +44,20 @@ class extension(): # Класс отвечающий за работу с google
             self.sheet_id = sheet_id # ID нужной нам Google sheet
         except Exception:
             print('Can not connect extention !')
+            # self.status = False
         else:
             print('Extention connected !')
+            # self.status = True
+
+    def is_connected(self):
+        try:
+            self.service.spreadsheets().get(spreadsheetId = self.sheet_id).execute()
+            print('Requested entity was found !')
+            return True
+        except Exception:
+            print('Requested entity was not found !')
+            return False
+
 
     def get_sheet_service(self): # Получаем доступ к нужной таблице с заранее подключенным потом
         json = os.path.dirname(__file__) + '\\' + self.CREDENTIALS_FILE
@@ -264,21 +277,26 @@ class extension(): # Класс отвечающий за работу с google
 def main():
     CREDENTIALS_FILE = 'pythonextension-202bab519501.json'  # Имя файла с закрытым ключом, вы должны подставить свое
     sheet_id = '1s7CcKw-uDbmjeSDgiB_jQQ2CwYq3t14k0Y_3kxO2KqA' # ID нужной нам Google sheet    # https://docs.google.com/spreadsheets/d/1s7CcKw-uDbmjeSDgiB_jQQ2CwYq3t14k0Y_3kxO2KqA/edit#gid=937792580
+    # sheet_id = '2wwew'
 
     obj = extension(CREDENTIALS_FILE,sheet_id)      # Ok
-    print(obj.get_sheetsId())                       # Ok
-    obj.add_newSheet(sheetTitle='Лист4')            # Ok
-    pprint(obj.read_sheet('Лист4'))                 # Ok
-    sheetsID = obj.get_sheetsId()
+    
+    if obj.is_connected():
+        # print(obj.status)
 
-    obj.add_tableTitle('Лист4!D1',['ХУЙ','ЗАЛУПА']) # Ok
-    obj.insert_data('Лист4!B6',[[4,5,6],[9,8,7]])   # Ok
-    obj.set_COLUMNS_width(sheetsID['Лист4'], 2, 4, 100)  # Ok
-    obj.set_frame(sheetsID['Лист4'], 0, 3, 0, 3)    # Ok
-    obj.merge_cells(sheetsID['Лист4'], 5, 5,  5, 6)  # Ok
-    obj.set_format(sheetsID['Лист4'], )
+        print(obj.get_sheetsId())                       # Ok
+        obj.add_newSheet(sheetTitle='Лист4')            # Ok
+        pprint(obj.read_sheet('Лист4'))                 # Ok
+        sheetsID = obj.get_sheetsId()
+
+        obj.add_tableTitle('Лист4!D1',['ХУЙ','ЗАЛУПА']) # Ok
+        obj.insert_data('Лист4!B6',[[4,5,6],[9,8,7]])   # Ok
+        obj.set_COLUMNS_width(sheetsID['Лист4'], 2, 4, 100)  # Ok
+        obj.set_frame(sheetsID['Лист4'], 0, 3, 0, 3)    # Ok
+        obj.merge_cells(sheetsID['Лист4'], 5, 5,  5, 6)  # Ok
+        # obj.set_format(sheetsID['Лист4'], )
 
 if __name__ == '__main__': # Если файл tg_bot.py вызаван, то будет запущен main(strBotToken); Если он будет импортироват то ничего не произайдёт
     main()
 
-print('Google_sheet_extension_v3_in_class is here !')
+print(f'{__name__} is here !')

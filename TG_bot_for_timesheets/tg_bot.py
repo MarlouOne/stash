@@ -8,7 +8,7 @@ import src.settings as settings # Импортируем "защищенный" 
 
 BOT_TOKEN        = settings.API_KEY # Токен из "защищенного" файла settings.py
 DB_PATH          = './TG_bot_for_timesheets/src/bot.db'
-CREDENTIALS_FILE = './TG_bot_for_timesheets/src/pythonextension-202bab519501.json'  # Файла "pythonextension-202bab519501.json", содержащий закрытый ключ 
+CREDENTIALS_FILE = '../src/pythonextension-202bab519501.json'  # Файла "pythonextension-202bab519501.json", содержащий закрытый ключ 
 
 
 from pprint import pprint
@@ -83,10 +83,10 @@ def set_GoogleSheetID(update : telegram.update.Update, context : telegram.ext.ca
     logging.info("Funcion 'set_GoogleSheetID' was colled !")
 
     context.user_data['status'] = 'set_GoogleSheetID' # Записываем сосояние ожидания ввода Google Sheet ID
-    old_ID = str(DB_handler.get_userSheetId(update)[0][0])
+    old_ID = str(DB_handler.get_userSheetId(update))
     keyboard = [ [ KeyboardButton(old_ID) ] ] # Создаём кнопку с введённым текстом | Нет параметра "Callback_data" 
     markup = ReplyKeyboardMarkup(keyboard, resize_keyboard = True, one_time_keyboard = True, input_field_placeholder = "Enter your Google sheet ID here:") # Создаём разметку с полученной кнопкой
-    update.callback_query.message.reply_text( text='Looks like you already was here. \n Please enter your Google sheet ID !', reply_markup = markup) # Выводим кнопку в чат 
+    update.callback_query.message.reply_text( text='Please enter your Google sheet ID !', reply_markup = markup) # Выводим кнопку в чат;  Остаток текста - Looks like you already was here. \n 
     # showVarType(old_ID)
 
 def insert_Google_Sheet_ID(update : telegram.update.Update, context : telegram.ext.callbackcontext.CallbackContext):
@@ -94,7 +94,18 @@ def insert_Google_Sheet_ID(update : telegram.update.Update, context : telegram.e
     logging.info(f"Funcion 'textHandler' was colled with context status {context.user_data['status']}")
 
     DB_handler.set_userSheetId(update)
-    context.user_data['status'] = 'Free' # Записываем сосояние без конкретной привязки к действиям пользователя 
+    status = GSE.extension(CREDENTIALS_FILE = CREDENTIALS_FILE, sheet_id= DB_handler.get_userSheetId(update)).status
+
+    print(DB_handler.get_userSheetId(update))
+    print(status)
+
+    if GSE.extension(CREDENTIALS_FILE = CREDENTIALS_FILE, sheet_id= DB_handler.get_userSheetId(update)).is_connected() == True:
+        update.message.reply_text(text='The bot has successfully connected to your Google sheet !')
+        context.user_data['status'] = 'Free' # Записываем сосояние без конкретной привязки к действиям пользователя 
+    else:
+        update.message.reply_text(text='The bot has successfully connected to your Google sheet !')
+        DB_handler.set_userSheetId(update)
+
 
 
 def callbackHandler(update : telegram.update.Update, context : telegram.ext.callbackcontext.CallbackContext): # Функция обработки обаратных запросов (callback_data)

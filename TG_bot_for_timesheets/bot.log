@@ -1,0 +1,63 @@
+2022-12-13 01:11:24,951 INFO Scheduler started
+2022-12-13 01:11:25,161 INFO "Bot" is alive !
+2022-12-13 01:11:25,207 INFO Funcion 'start' was colled !
+2022-12-13 01:11:25,411 INFO Funcion 'start' was colled !
+2022-12-13 01:11:25,500 INFO Funcion 'start' was colled !
+2022-12-13 01:11:49,929 INFO Funcion 'start' was colled !
+2022-12-13 01:11:52,100 INFO Funcion 'callbackHandler' was colled !
+2022-12-13 01:11:52,100 INFO Query - 'startCallback' !
+2022-12-13 01:11:52,100 INFO Funcion 'login' was colled !
+2022-12-13 01:11:58,796 INFO Funcion 'callbackHandler' was colled !
+2022-12-13 01:11:58,796 INFO Query - 'set_GoogleSheetID' !
+2022-12-13 01:11:58,797 INFO Funcion 'set_GoogleSheetID' was colled !
+2022-12-13 22:03:36,352 INFO Scheduler started
+2022-12-13 22:03:36,578 INFO "Bot" is alive !
+2022-12-13 22:10:03,808 INFO Scheduler started
+2022-12-13 22:10:04,092 INFO "Bot" is alive !
+2022-12-13 22:10:09,737 INFO Funcion 'start' was colled !
+2022-12-13 22:10:11,655 INFO Funcion 'callbackHandler' was colled !
+2022-12-13 22:10:11,655 INFO Query - 'startCallback' !
+2022-12-13 22:10:11,656 INFO Funcion 'login' was colled !
+2022-12-13 22:10:12,649 INFO Funcion 'callbackHandler' was colled !
+2022-12-13 22:10:12,649 INFO Query - 'set_GoogleSheetID' !
+2022-12-13 22:10:12,650 INFO Funcion 'set_GoogleSheetID' was colled !
+2022-12-13 22:10:14,297 INFO Funcion 'textHandler' was colled with context status {'status': 'set_GoogleSheetID'} !
+2022-12-13 22:10:14,298 INFO Funcion 'textHandler' was colled with context status set_GoogleSheetID
+2022-12-13 22:10:14,399 ERROR No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "C:\Python311\Lib\site-packages\telegram\ext\dispatcher.py", line 557, in process_update
+    handler.handle_update(update, self, check, context)
+  File "C:\Python311\Lib\site-packages\telegram\ext\handler.py", line 199, in handle_update
+    return self.callback(update, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\major\Documents\GitHub\stash\TG_bot_for_timesheets\tg_bot.py", line 140, in textHandler
+    insert_Google_Sheet_ID(update, context)
+  File "c:\Users\major\Documents\GitHub\stash\TG_bot_for_timesheets\tg_bot.py", line 97, in insert_Google_Sheet_ID
+    status = GSE.extension(CREDENTIALS_FILE = CREDENTIALS_FILE, sheet_id= DB_handler.get_userSheetId(update)).status
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'extension' object has no attribute 'status'
+2022-12-13 22:10:46,058 INFO Scheduler started
+2022-12-13 22:10:46,264 INFO "Bot" is alive !
+2022-12-13 22:10:49,994 INFO Funcion 'start' was colled !
+2022-12-13 22:10:51,206 INFO Funcion 'callbackHandler' was colled !
+2022-12-13 22:10:51,206 INFO Query - 'startCallback' !
+2022-12-13 22:10:51,206 INFO Funcion 'login' was colled !
+2022-12-13 22:10:51,986 INFO Funcion 'callbackHandler' was colled !
+2022-12-13 22:10:51,986 INFO Query - 'set_GoogleSheetID' !
+2022-12-13 22:10:51,987 INFO Funcion 'set_GoogleSheetID' was colled !
+2022-12-13 22:10:53,075 INFO Funcion 'textHandler' was colled with context status {'status': 'set_GoogleSheetID'} !
+2022-12-13 22:10:53,077 INFO Funcion 'textHandler' was colled with context status set_GoogleSheetID
+2022-12-13 22:10:53,155 INFO file_cache is only supported with oauth2client<4.0.0
+2022-12-13 22:10:53,293 ERROR No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "C:\Python311\Lib\site-packages\telegram\ext\dispatcher.py", line 557, in process_update
+    handler.handle_update(update, self, check, context)
+  File "C:\Python311\Lib\site-packages\telegram\ext\handler.py", line 199, in handle_update
+    return self.callback(update, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\major\Documents\GitHub\stash\TG_bot_for_timesheets\tg_bot.py", line 140, in textHandler
+    insert_Google_Sheet_ID(update, context)
+  File "c:\Users\major\Documents\GitHub\stash\TG_bot_for_timesheets\tg_bot.py", line 97, in insert_Google_Sheet_ID
+    status = GSE.extension(CREDENTIALS_FILE = CREDENTIALS_FILE, sheet_id= DB_handler.get_userSheetId(update)).status
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'extension' object has no attribute 'status'

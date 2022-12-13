@@ -28,11 +28,15 @@ class tgbot_db(lite.handler):
             update.message.reply_text( text='Something gone wrong !') 
 
     def get_userSheetId(self, update : telegram.update.Update):
-        userID = update.callback_query.message.chat.id # Работает. Возвращает содержимое словаря "chat" -> id , first_name, type, username
+        try:
+            userID = update.callback_query.message.chat.id # Работает. Возвращает содержимое словаря "chat" -> id , first_name, type, username
+        except Exception:
+            userID = update.message.chat.id # Работает. Возвращает содержимое словаря "chat" -> id , first_name, type, username
+
         condition = f"user_id = {userID}"
         result =  self.selectFromWhere(coloms='user_sheet_id', table_name="users", condition=condition)
         # print(result)
-        return result
+        return result[0][0]
 
     def set_userSheetId(self, update : telegram.update.Update):
         #  self.sql_cursor.execute(f'UPDATE {table_name} SET {colom} = {value} where {condition}')
