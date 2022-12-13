@@ -94,17 +94,26 @@ def insert_Google_Sheet_ID(update : telegram.update.Update, context : telegram.e
     logging.info(f"Funcion 'insert_Google_Sheet_ID' was colled with context status {context.user_data['status']}")
 
     DB_handler.set_userSheetId(update) # Записываем новый Google sheet ID в БД для данного пользователя 
+    check_Google_Sheet_ID(update, context)
+
+def check_Google_Sheet_ID(update : telegram.update.Update, context : telegram.ext.callbackcontext.CallbackContext):
+    print(f"Funcion 'check_Google_Sheet_ID' was colled with context status {context.user_data['status']} !")
+    logging.info(f"Funcion 'check_Google_Sheet_ID' was colled with context status {context.user_data['status']}")
+
     # status = GSE.extension(CREDENTIALS_FILE = CREDENTIALS_FILE, sheet_id= DB_handler.get_userSheetId(update)).status
 
     # print(DB_handler.get_userSheetId(update))
     # print(status)
 
     if GSE.extension(CREDENTIALS_FILE = CREDENTIALS_FILE, sheet_id= DB_handler.get_userSheetId(update)).is_connected() == True:
-        update.message.reply_text(text='The bot has successfully connected to your Google sheet !')
+        keyboard = [ [  ] ] # Создаём кнопку с введённым текстом | Нет параметра "Callback_data" 
+        markup = ReplyKeyboardMarkup(keyboard, resize_keyboard = True) # Создаём разметку с полученной кнопкой
+        update.message.reply_text(text='The bot has successfully connected to your Google sheet !', reply_markup=markup)
+
         context.user_data['status'] = 'Free' # Записываем сосояние без конкретной привязки к действиям пользователя 
     else:
         update.message.reply_text(text='The bot has not successfully connected to your Google sheet !')
-        DB_handler.set_userSheetId(update)
+        # DB_handler.set_userSheetId(update)
 
 
 
@@ -131,11 +140,11 @@ def textHandler(update : telegram.update.Update, context : telegram.ext.callback
     logging.info(f"Funcion 'textHandler' was colled with context status {context.user_data} !")
 
   
-    status = context.user_data['status']
-    print(status == 'set_GoogleSheetID')
-    showVarType(status)
+    context_status = context.user_data['status']
+    # print(context_status == 'set_GoogleSheetID')
+    showVarType(context_status)
 
-    if status == 'set_GoogleSheetID':
+    if context_status == 'set_GoogleSheetID':
         print("Go to insert_Google_Sheet_ID !")
         insert_Google_Sheet_ID(update, context)
     
