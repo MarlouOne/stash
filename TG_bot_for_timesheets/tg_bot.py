@@ -90,20 +90,20 @@ def set_GoogleSheetID(update : telegram.update.Update, context : telegram.ext.ca
     # showVarType(old_ID)
 
 def insert_Google_Sheet_ID(update : telegram.update.Update, context : telegram.ext.callbackcontext.CallbackContext):
-    print(f"Funcion 'textHandler' was colled with context status {context.user_data['status']} !")
-    logging.info(f"Funcion 'textHandler' was colled with context status {context.user_data['status']}")
+    print(f"Funcion 'insert_Google_Sheet_ID' was colled with context status {context.user_data['status']} !")
+    logging.info(f"Funcion 'insert_Google_Sheet_ID' was colled with context status {context.user_data['status']}")
 
-    DB_handler.set_userSheetId(update)
-    status = GSE.extension(CREDENTIALS_FILE = CREDENTIALS_FILE, sheet_id= DB_handler.get_userSheetId(update)).status
+    DB_handler.set_userSheetId(update) # Записываем новый Google sheet ID в БД для данного пользователя 
+    # status = GSE.extension(CREDENTIALS_FILE = CREDENTIALS_FILE, sheet_id= DB_handler.get_userSheetId(update)).status
 
-    print(DB_handler.get_userSheetId(update))
-    print(status)
+    # print(DB_handler.get_userSheetId(update))
+    # print(status)
 
     if GSE.extension(CREDENTIALS_FILE = CREDENTIALS_FILE, sheet_id= DB_handler.get_userSheetId(update)).is_connected() == True:
         update.message.reply_text(text='The bot has successfully connected to your Google sheet !')
         context.user_data['status'] = 'Free' # Записываем сосояние без конкретной привязки к действиям пользователя 
     else:
-        update.message.reply_text(text='The bot has successfully connected to your Google sheet !')
+        update.message.reply_text(text='The bot has not successfully connected to your Google sheet !')
         DB_handler.set_userSheetId(update)
 
 
