@@ -110,12 +110,18 @@ def check_Google_Sheet_ID(update : telegram.update.Update, context : telegram.ex
         markup = ReplyKeyboardMarkup(keyboard, resize_keyboard = True) # Создаём разметку с полученной кнопкой
         update.message.reply_text(text='The bot has successfully connected to your Google sheet !', reply_markup=markup)
 
-        context.user_data['status'] = 'Free' # Записываем сосояние без конкретной привязки к действиям пользователя 
+        context.user_data['status'] = 'Google' # Записываем сосояние без конкретной привязки к действиям пользователя 
+        googleHandler(update, context)
     else:
         update.message.reply_text(text='The bot has not successfully connected to your Google sheet !')
         # DB_handler.set_userSheetId(update)
 
+def googleHandler(update : telegram.update.Update, context : telegram.ext.callbackcontext.CallbackContext): # Функция обработки запросов к google sheet
+    print(f"Funcion 'googleHandler' was colled with context status {context.user_data['status']} !")
+    logging.info(f"Funcion 'googleHandler' was colled with context status {context.user_data['status']}")
 
+
+    pass
 
 def callbackHandler(update : telegram.update.Update, context : telegram.ext.callbackcontext.CallbackContext): # Функция обработки обаратных запросов (callback_data)
     global path
@@ -132,6 +138,8 @@ def callbackHandler(update : telegram.update.Update, context : telegram.ext.call
         login(update, context)
     elif query == 'set_GoogleSheetID':
         set_GoogleSheetID(update, context)
+    elif query == 'use_extention':
+        googleHandler(update, context)
 
 def textHandler(update : telegram.update.Update, context : telegram.ext.callbackcontext.CallbackContext): # Функция обработки текстовых сообщений
 
