@@ -1,5 +1,7 @@
 import smtplib
 import dependence.json_handler as json_handler
+from email.message import EmailMessage
+import imghdr
 
 class postman():
     post_service : smtplib.SMTP
@@ -29,59 +31,104 @@ class postman():
         else:
             print(f'--- Message delivered message to {receiver_email}')
 
-
-
     def drop_service(self) -> None: # Завершение сеанса рассылки
         self.post_service.quit()
         print(f'--- Session closed')
 
     def broadcast_json(self, file_path : str) -> None : # Рассылка множество писем по данным из json файла
         data = json_handler.read_json(file_path)
-        for item in data.items():
-            self.send_mail(item[0], item[1])
+        for dicts in data:
+            items = list(dicts.values())
+            m = massage(self)
+            m.set_content(items[0], items[1], items[2])
+            m.set_attachment(items[3])
+            m.send_mail()
     
-    def broadcast_dict(self, data : dict) -> None :  # Рассылка множество писем по данным из словаря
-        for item in data.items():
-            self.send_mail(item[0], item[1])
+    def broadcast_cache(self, data : list) -> None :  # Рассылка множество писем по данным из словаря
+        for dicts in data:
+            items = list(dicts.values())
+            m = massage(self)
+            m.set_content(items[0], items[1], items[2])
+            m.set_attachment(items[3])
+            m.send_mail()
+    
 
-TEXT = 'Мужчины и Дамы, тут будет обсуждаться план проведения очередного Нового года. \n Все будут услышаны, поэтому предлагайте свои идеи !'
+
+class massage(postman):
+    msg : EmailMessage
+    man : postman
+
+    def __init__(self, man : postman) -> None:
+        self.msg = EmailMessage()
+        self.man = man
+        self.msg['From'] = self.man.email
+
+    def set_text(self, text : str) -> None:
+        self.msg.set_content(text)
+    
+    def set_subject(self, subject : str) -> None:
+        self.msg['Subject'] = subject
+
+    def set_receiver_email(self, receiver_email : str) -> None:
+        self.msg['To'] = receiver_email
+    
+    def set_attachment(self, file_path) -> None:
+        with open(file_path, 'rb') as attachment:
+            image_data = attachment.read()
+            image_type = imghdr.what(attachment.name)
+            image_name = attachment.name
+        self.msg.add_attachment(image_data, maintype='image', subtype=image_type, filename=image_name)
+
+    def set_content(self, receiver_email : str, subject : str, text : str) -> None:
+        self.set_receiver_email(receiver_email)
+        self.set_subject(subject)
+        self.set_text(text)
+    
+
+    def send_mail(self) -> None:
+        try :
+            self.man.post_service.send_message(self.msg)
+        except Exception:
+            print(f'--- Can`t delevery message to {self.msg["To"]}')
+        else:
+            print(f'--- Message delivered message to {self.msg["To"]}')
 
 def main():
     man = postman('majorstol@gmail.com', 'datwdfqcebyanyup')
     man.self_check()
 
-    d = {
-    'CPTStol@yandex.ru':'Test massage from dict',
-    'majorstol@gmail.com':'Test massage from dict',
-    'pushihin@inbox.ru':'Test massage from dict'
-    }  
+    l = [
+            {
+                "email": "CPTStol@yandex.ru",
+                "subject": "Test - Тест",
+                "text": "Test massage - Тескстовое сообщение",
+                "attachment": "python_email\\Daddy.jpg"
+            },
+            {
+                "email": "majorstol@gmail.com",
+                "subject": "Test - Тест",
+                "text": "Test massage - Тескстовое сообщение",
+                "attachment": "python_email\\Daddy.jpg"
+            },
+            {
+                "email": "pushihin@inbox.ru",
+                "subject": "Test - Тест",
+                "text": "Test massage - Тескстовое сообщение",
+                "attachment": "python_email\\Daddy.jpg"
+            },
+            {
+                "email": "g.jarkovskij@yandex.ru",
+                "subject": "For Goga - Заголовок",
+                "text": "Derji papku ! - Тескстовое сообщение",
+                "attachment": "python_email\\Daddy.jpg"
+            },
+        ]           
 
-    man.broadcast_dict(d)
+    man.broadcast_cache(l)
 
-    # man.send_mail('majorstol@gmail.com',TEXT) # \n Бабы are temporary !
-    # man.send_mail('pushihin@inbox.ru','[хуй] is eternal !') # \n Бабы are temporary !
-    # man.send_mail('CPTStol@yandex.ru','[хуй] is eternal !') # \n Бабы are temporary !
-
-    man.broadcast_json('email_data.json')
-
+    # man.broadcast_json('python_email\email_data.json')
 
     man.drop_service()
-    
-# main()
-
-
-
-
-# smtpObj = smtplib.SMTP('smtp.gmail.com', 587)
-
-# smtpObj.starttls()
-
-# smtpObj.login('majorstol@gmail.com','datwdfqcebyanyup')
-
-# smtpObj.sendmail("majorstol@gmail.com","majorstol@gmail.com","go to bed!")
-
-# smtpObj.quit()
-
 
 if __name__ == '__main__': 
     main()

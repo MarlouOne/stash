@@ -1,5 +1,20 @@
-{
-   "CPTStol@yandex.ru": "Test massage from json",
-   "majorstol@gmail.com": "Test massage from json",
-   "pushihin@inbox.ru": "Test massage from json"
-}
+[
+   {
+      "email": "CPTStol@yandex.ru",
+      "subject": "Test - Тест",
+      "text": "Test massage - Тескстовое сообщение",
+      "attachment": "python_email\\Daddy.jpg"
+   },
+   {
+      "email": "majorstol@gmail.com",
+      "subject": "Test - Тест",
+      "text": "Test massage - Тескстовое сообщение",
+      "attachment": "python_email\\Daddy.jpg"
+   },
+   {
+      "email": "pushihin@inbox.ru",
+      "subject": "Test - Тест",
+      "text": "Test massage - Тескстовое сообщение",
+      "attachment": "python_email\\Daddy.jpg"
+   }
+]
