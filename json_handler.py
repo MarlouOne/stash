@@ -10,8 +10,8 @@ def add_json(file_path : str, content : dict) -> None: # Запись в JSON ф
     with open(file_path, 'w') as file:
         json.dump(content | old_content, file, ensure_ascii=False, indent=3)
 
-def read_json(file_path : str) -> dict:
-    with open(file_path, 'r') as file:
+def read_json(file_path : str) -> list or dict:
+    with open(file_path, 'r', encoding='utf-8') as file:
         return json.load(file)
 
 def main():

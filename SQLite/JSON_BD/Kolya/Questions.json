@@ -1,0 +1,110 @@
+[
+    {
+        "id": 17,
+        "id_olimpiad": null,
+        "name": null,
+        "type": null
+    },
+    {
+        "id": 18,
+        "id_olimpiad": null,
+        "name": null,
+        "type": null
+    },
+    {
+        "id": 19,
+        "id_olimpiad": null,
+        "name": null,
+        "type": null
+    },
+    {
+        "id": 20,
+        "id_olimpiad": null,
+        "name": null,
+        "type": null
+    },
+    {
+        "id": 21,
+        "id_olimpiad": null,
+        "name": null,
+        "type": null
+    },
+    {
+        "id": 22,
+        "id_olimpiad": null,
+        "name": null,
+        "type": null
+    },
+    {
+        "id": 23,
+        "id_olimpiad": null,
+        "name": null,
+        "type": null
+    },
+    {
+        "id": 24,
+        "id_olimpiad": null,
+        "name": null,
+        "type": null
+    },
+    {
+        "id": 25,
+        "id_olimpiad": null,
+        "name": null,
+        "type": null
+    },
+    {
+        "id": 26,
+        "id_olimpiad": null,
+        "name": null,
+        "type": null
+    },
+    {
+        "id": 27,
+        "id_olimpiad": 1,
+        "name": "Что получится, если на шифровальной машине энигма ввести с параметрами дисков(роторов) A B C зашифровать слово WORLD     ",
+        "type": 3
+    },
+    {
+        "id": 28,
+        "id_olimpiad": 1,
+        "name": "По формуле Шеннона посчитать энтропию в файле",
+        "type": 3
+    },
+    {
+        "id": 29,
+        "id_olimpiad": 1,
+        "name": "Найдите flag (ответ на решение задачи) на странице ",
+        "type": 3
+    },
+    {
+        "id": 30,
+        "id_olimpiad": 1,
+        "name": "Иногда ответы на сложные вопросы могут быть уже решены, нет необходимости изобретать велосипед",
+        "type": 3
+    },
+    {
+        "id": 31,
+        "id_olimpiad": 1,
+        "name": "Какое решение примет Маша, если нейронные связи в ее голове построены так",
+        "type": 1
+    },
+    {
+        "id": 32,
+        "id_olimpiad": 1,
+        "name": "Указать на географические координаты данного фото (ответ вводить последовательностью из 12-ти цифр очерёдностью \"широта -> долгота\")",
+        "type": 3
+    },
+    {
+        "id": 33,
+        "id_olimpiad": 1,
+        "name": "Решите загадку с файлом матрешкой",
+        "type": 3
+    },
+    {
+        "id": 34,
+        "id_olimpiad": 1,
+        "name": "При спектральном анализе данного файла можем ли мы сказать, что максимальная частота данного аудиофайла превышает",
+        "type": 1
+    }
+]

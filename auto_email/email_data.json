@@ -3,18 +3,18 @@
       "email": "CPTStol@yandex.ru",
       "subject": "Test - Тест",
       "text": "Test massage - Тескстовое сообщение",
-      "attachment": "python_email\\Daddy.jpg"
+      "attachment": "auto_email\\Daddy.jpg"
    },
    {
       "email": "majorstol@gmail.com",
       "subject": "Test - Тест",
       "text": "Test massage - Тескстовое сообщение",
-      "attachment": "python_email\\Daddy.jpg"
+      "attachment": "auto_email\\Daddy.jpg"
    },
    {
       "email": "pushihin@inbox.ru",
       "subject": "Test - Тест",
       "text": "Test massage - Тескстовое сообщение",
-      "attachment": "python_email\\Daddy.jpg"
+      "attachment": "auto_email\\Daddy.jpg"
    }
 ]

@@ -1,0 +1,30 @@
+[
+    {
+        "name": "Olimpiads",
+        "seq": 1
+    },
+    {
+        "name": "Questions",
+        "seq": 34
+    },
+    {
+        "name": "Answers",
+        "seq": 54
+    },
+    {
+        "name": "Descriptions",
+        "seq": 16
+    },
+    {
+        "name": "Users",
+        "seq": 19
+    },
+    {
+        "name": "UserAnswers",
+        "seq": 96
+    },
+    {
+        "name": "Leader_boards",
+        "seq": 6
+    }
+]

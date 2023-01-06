@@ -1,7 +1,12 @@
 import smtplib
-import dependence.json_handler as json_handler
+# import dependence.json_handler as json_handler
 from email.message import EmailMessage
 import imghdr
+
+import sys
+import os
+sys.path.insert(0, os.path.abspath('./')) # Добавляем папку выше уровнем 
+import json_handler
 
 class postman():
     post_service : smtplib.SMTP
@@ -102,25 +107,25 @@ def main():
                 "email": "CPTStol@yandex.ru",
                 "subject": "Test - Тест",
                 "text": "Test massage - Тескстовое сообщение",
-                "attachment": "python_email\\Daddy.jpg"
+                "attachment": "auto_email\Daddy.jpg"
             },
             {
                 "email": "majorstol@gmail.com",
                 "subject": "Test - Тест",
                 "text": "Test massage - Тескстовое сообщение",
-                "attachment": "python_email\\Daddy.jpg"
+                "attachment": "auto_email\Daddy.jpg"
             },
             {
                 "email": "pushihin@inbox.ru",
                 "subject": "Test - Тест",
                 "text": "Test massage - Тескстовое сообщение",
-                "attachment": "python_email\\Daddy.jpg"
+                "attachment": "auto_email\Daddy.jpg"
             },
             {
                 "email": "g.jarkovskij@yandex.ru",
                 "subject": "For Goga - Заголовок",
                 "text": "Derji papku ! - Тескстовое сообщение",
-                "attachment": "python_email\\Daddy.jpg"
+                "attachment": "auto_email\Daddy.jpg"
             },
         ]           
 

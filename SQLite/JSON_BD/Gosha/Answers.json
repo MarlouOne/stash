@@ -1,0 +1,164 @@
+[
+    {
+        "id": 1,
+        "id_questions": 17,
+        "status": 0,
+        "text": "12414"
+    },
+    {
+        "id": 2,
+        "id_questions": 17,
+        "status": 0,
+        "text": "345345"
+    },
+    {
+        "id": 3,
+        "id_questions": 17,
+        "status": 1,
+        "text": "241117"
+    },
+    {
+        "id": 4,
+        "id_questions": 17,
+        "status": 1,
+        "text": "79797659"
+    },
+    {
+        "id": 5,
+        "id_questions": 18,
+        "status": 1,
+        "text": "один к одному"
+    },
+    {
+        "id": 6,
+        "id_questions": 18,
+        "status": 1,
+        "text": "один к многим"
+    },
+    {
+        "id": 7,
+        "id_questions": 18,
+        "status": 1,
+        "text": "многие ко многим"
+    },
+    {
+        "id": 8,
+        "id_questions": 18,
+        "status": 0,
+        "text": "многие к одному"
+    },
+    {
+        "id": 9,
+        "id_questions": 19,
+        "status": 1,
+        "text": "Тьюринг"
+    },
+    {
+        "id": 10,
+        "id_questions": 19,
+        "status": 0,
+        "text": "Карно"
+    },
+    {
+        "id": 11,
+        "id_questions": 19,
+        "status": 0,
+        "text": "Виженера"
+    },
+    {
+        "id": 12,
+        "id_questions": 20,
+        "status": 1,
+        "text": "бит"
+    },
+    {
+        "id": 13,
+        "id_questions": 20,
+        "status": 0,
+        "text": "байт"
+    },
+    {
+        "id": 14,
+        "id_questions": 20,
+        "status": 0,
+        "text": "гигабайт"
+    },
+    {
+        "id": 15,
+        "id_questions": 20,
+        "status": 0,
+        "text": "ячейка"
+    },
+    {
+        "id": 16,
+        "id_questions": 21,
+        "status": 1,
+        "text": "server"
+    },
+    {
+        "id": 17,
+        "id_questions": 22,
+        "status": 1,
+        "text": "O(n*n)"
+    },
+    {
+        "id": 18,
+        "id_questions": 22,
+        "status": 0,
+        "text": "O(2^n)"
+    },
+    {
+        "id": 19,
+        "id_questions": 22,
+        "status": 0,
+        "text": "O(n^3)"
+    },
+    {
+        "id": 20,
+        "id_questions": 23,
+        "status": 0,
+        "text": "0:128"
+    },
+    {
+        "id": 21,
+        "id_questions": 23,
+        "status": 0,
+        "text": "0:156"
+    },
+    {
+        "id": 22,
+        "id_questions": 23,
+        "status": 0,
+        "text": "-64:64"
+    },
+    {
+        "id": 23,
+        "id_questions": 23,
+        "status": 1,
+        "text": "-127:127"
+    },
+    {
+        "id": 24,
+        "id_questions": 24,
+        "status": 1,
+        "text": "полиморфизм"
+    },
+    {
+        "id": 25,
+        "id_questions": 24,
+        "status": 1,
+        "text": "наследование"
+    },
+    {
+        "id": 26,
+        "id_questions": 24,
+        "status": 1,
+        "text": "инкапсулирование"
+    },
+    {
+        "id": 27,
+        "id_questions": 24,
+        "status": 0,
+        "text": "многообразие"
+    }
+]
