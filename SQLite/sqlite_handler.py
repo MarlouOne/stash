@@ -45,34 +45,34 @@ class sqlite_handler():
 
     def insert_many(self, table_name : str, data : list) -> None:
         try:
-            self.sql_cursor.executemany(f"INSERT INTO {table_name} VALUES { set_questions( len( data[0] ) ) }", data)
+            self.sql_cursor.executemany(f"INSERT INTO {table_name} VALUES { self.set_questions( len( data[0] ) ) }", data)
             self.sql_connection.commit()
         except sqlite3.Error as error:
             print(error)
         else:
             print(f"{table_name} was updated")
 
-    def get_fieldNames(self) -> list:
-        return list( map(lambda x: x[0], self.sql_cursor.description) )
+    def get_fieldNames(self, table_name) -> list:
+        cursor = self.sql_cursor.execute(f'select * from {table_name}')
+        colnames  = cursor.description
+        list_fieldNames = []
+        for row in colnames:
+            list_fieldNames.append( row[0] )
+        return list_fieldNames
 
     def update_database(self, data_folder : str) -> None:
         list_filenames = []
 
         sys.path.insert(0, os.path.abspath(f'./{data_folder}'))
-        # print(sys.path)
 
         for (dirpath, dirnames, filenames) in os.walk(data_folder):
             list_filenames.extend(filenames)
             break
 
-        # print(list_filenames)
-
         for file_name in list_filenames:
             table_name = file_name.split('.')[0]
-            # print(table_name)
-            # print( 'Path - ', sys.path[0] + '\\' + file_name )
             path = sys.path[0] + '\\' + file_name
-            data = set_data_to_insert(path)
+            data = self.set_data_to_insert(path, table_name)
 
             if data == None : 
                 print(f"{file_name} is empty")
@@ -82,26 +82,25 @@ class sqlite_handler():
         
 
 
-def set_questions(len_cell : int) -> str:
-    line = '('
-    for i in range(len_cell):
-        line += '?, '
-    return line[:-2] + ')'
+    def set_questions(self, len_cell : int) -> str:
+        line = '('
+        for i in range(len_cell):
+            line += '?, '
+        return line[:-2] + ')'
 
-def set_data_to_insert(file_name : str) -> list:
-    data = json_handler.read_json(file_name)
+    def set_data_to_insert(self, file_name : str, table_name : str) -> list:
+        data = json_handler.read_json(file_name)
 
-    if data == None: return None
+        if data == None: return None
 
-    # print(data)
+        order = self.get_fieldNames(table_name)
+        
 
-    cache = []
-    for dicts in data:
-
-        # print(dicts)
-
-        list_cache = []
-        for items in dicts.items():
-            list_cache.append( items[1] )
-        cache.append( tuple(list_cache) )
-    return cache
+        cache = []
+        for dicts in data:
+            list_cache = []
+            for item in order:
+                list_cache.append( dicts[item] )
+            cache.append( tuple(list_cache) )
+        print(cache)
+        return cache
