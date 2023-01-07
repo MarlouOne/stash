@@ -53,8 +53,7 @@ class sqlite_handler():
             print(f"{table_name} was updated")
 
     def get_fieldNames(self, table_name) -> list:
-        cursor = self.sql_cursor.execute(f'select * from {table_name}')
-        colnames  = cursor.description
+        colnames = self.sql_cursor.execute(f'select * from {table_name}').description
         list_fieldNames = []
         for row in colnames:
             list_fieldNames.append( row[0] )
@@ -102,5 +101,5 @@ class sqlite_handler():
             for item in order:
                 list_cache.append( dicts[item] )
             cache.append( tuple(list_cache) )
-        print(cache)
+        # print(cache)
         return cache
