@@ -3,6 +3,9 @@ import smtplib
 from email.message import EmailMessage
 import imghdr
 
+from mimetypes import MimeTypes
+from urllib.request import pathname2url
+
 import sys
 import os
 sys.path.insert(0, os.path.abspath('./')) # Добавляем папку выше уровнем 
@@ -17,6 +20,8 @@ class postman():
         try:
             self.email = email
             self.post_service = smtplib.SMTP('smtp.gmail.com', 587)
+            # self.post_service = smtplib.SMTP('smtp.gmail.com', 587)
+        
             self.post_service.starttls()
             self.post_service.login(email , password)
         except Exception:
@@ -47,6 +52,7 @@ class postman():
             m = massage(self)
             m.set_content(items[0], items[1], items[2])
             m.set_attachment(items[3])
+            # m.set_attachment_file(items[4])
             m.send_mail()
     
     def broadcast_cache(self, data : list) -> None :  # Рассылка множество писем по данным из словаря
@@ -55,6 +61,7 @@ class postman():
             m = massage(self)
             m.set_content(items[0], items[1], items[2])
             m.set_attachment(items[3])
+            # m.set_attachment_file(items[4])
             m.send_mail()
     
 
@@ -77,12 +84,24 @@ class massage(postman):
     def set_receiver_email(self, receiver_email : str) -> None:
         self.msg['To'] = receiver_email
     
+    # def set_attachment_image(self, file_path) -> None:
+    #     with open(file_path, 'rb') as attachment:
+    #         image_data = attachment.read()
+    #         image_type = imghdr.what(attachment.name)
+    #         image_name = attachment.name
+    #     self.msg.add_attachment(image_data, maintype='image', subtype=image_type, filename=image_name)
+
+    def get_maintype(self, file_path : str) -> list:
+        mime = MimeTypes()
+        url = pathname2url(file_path)
+        return ( mime.guess_type(url) )[0].split('/')
+        
     def set_attachment(self, file_path) -> None:
         with open(file_path, 'rb') as attachment:
-            image_data = attachment.read()
-            image_type = imghdr.what(attachment.name)
-            image_name = attachment.name
-        self.msg.add_attachment(image_data, maintype='image', subtype=image_type, filename=image_name)
+            file_data = attachment.read()
+            file_type =  self.get_maintype(file_path)
+            file_name = attachment.name
+        self.msg.add_attachment(file_data, maintype=file_type[0], subtype=file_type[1], filename=file_name.split('.')[0])
 
     def set_content(self, receiver_email : str, subject : str, text : str) -> None:
         self.set_receiver_email(receiver_email)
@@ -99,7 +118,7 @@ class massage(postman):
             print(f'--- Message delivered message to {self.msg["To"]}')
 
 def main():
-    man = postman('majorstol@gmail.com', 'datwdfqcebyanyup')
+    man = postman('majorstol@gmail.com', 'datwdfqcebyanyup') # Создаём сессию "EP"
     man.self_check()
 
     l = [
@@ -107,7 +126,8 @@ def main():
                 "email": "CPTStol@yandex.ru",
                 "subject": "Test - Тест",
                 "text": "Test massage - Тескстовое сообщение",
-                "attachment": "auto_email\Daddy.jpg"
+                # "attachment": "auto_email\Daddy.jpg"
+                "attachment": "auto_email\IMAGE 2023-01-19 22_43_10.pdf"
             },
             {
                 "email": "majorstol@gmail.com",
