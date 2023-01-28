@@ -5,6 +5,7 @@ import imghdr
 
 from mimetypes import MimeTypes
 from urllib.request import pathname2url
+from email.mime.text import MIMEText
 
 import sys
 import os
@@ -52,16 +53,14 @@ class postman():
             m = massage(self)
             m.set_content(items[0], items[1], items[2])
             m.set_attachment(items[3])
-            # m.set_attachment_file(items[4])
             m.send_mail()
     
     def broadcast_cache(self, data : list) -> None :  # Рассылка множество писем по данным из словаря
         for dicts in data:
-            items = list(dicts.values())
             m = massage(self)
-            m.set_content(items[0], items[1], items[2])
-            m.set_attachment(items[3])
-            # m.set_attachment_file(items[4])
+            m.set_content(dicts["email"], dicts["subject"], dicts["text"])
+            m.set_attachment(dicts["attachment"])
+            m.set_html(dicts["html"])
             m.send_mail()
     
 
@@ -84,24 +83,26 @@ class massage(postman):
     def set_receiver_email(self, receiver_email : str) -> None:
         self.msg['To'] = receiver_email
     
-    # def set_attachment_image(self, file_path) -> None:
-    #     with open(file_path, 'rb') as attachment:
-    #         image_data = attachment.read()
-    #         image_type = imghdr.what(attachment.name)
-    #         image_name = attachment.name
-    #     self.msg.add_attachment(image_data, maintype='image', subtype=image_type, filename=image_name)
-
     def get_maintype(self, file_path : str) -> list:
         mime = MimeTypes()
         url = pathname2url(file_path)
         return ( mime.guess_type(url) )[0].split('/')
-        
-    def set_attachment(self, file_path) -> None:
-        with open(file_path, 'rb') as attachment:
-            file_data = attachment.read()
-            file_type =  self.get_maintype(file_path)
-            file_name = attachment.name
-        self.msg.add_attachment(file_data, maintype=file_type[0], subtype=file_type[1], filename=file_name.split('.')[0])
+
+    def set_attachment(self, list_files) -> None:
+        for file_path in list_files:
+            with open(file_path, 'rb') as attachment:
+                file_data = attachment.read()
+                file_type =  self.get_maintype(file_path)
+                file_name = attachment.name
+                self.msg.add_attachment(file_data, maintype=file_type[0], subtype=file_type[1], filename=file_name.split('.')[0])
+
+    def set_html(self, html_file : str) -> None:
+        try:
+            with open(html_file, 'r', encoding='utf-8') as file:
+                content = file.read()
+                # self.msg = 
+        except Exception:
+            print('Error in setting HTML')
 
     def set_content(self, receiver_email : str, subject : str, text : str) -> None:
         self.set_receiver_email(receiver_email)
@@ -119,34 +120,38 @@ class massage(postman):
 
 def main():
     man = postman('majorstol@gmail.com', 'datwdfqcebyanyup') # Создаём сессию "EP"
-    man.self_check()
+    # man.self_check() # Проверка работоспособности соединения сессии
 
     l = [
-            {
-                "email": "CPTStol@yandex.ru",
-                "subject": "Test - Тест",
-                "text": "Test massage - Тескстовое сообщение",
-                # "attachment": "auto_email\Daddy.jpg"
-                "attachment": "auto_email\IMAGE 2023-01-19 22_43_10.pdf"
-            },
+            # {
+            #     "email": "CPTStol@yandex.ru",
+            #     "subject": "Test - Тест",
+            #     "text": "Test massage - Тескстовое сообщение",
+            #     "attachment": ["auto_email\IMAGE 2023-01-19 22_43_10.pdf"],
+            #     "html": "auto_email\Test.html"
+            # },
             {
                 "email": "majorstol@gmail.com",
                 "subject": "Test - Тест",
                 "text": "Test massage - Тескстовое сообщение",
-                "attachment": "auto_email\Daddy.jpg"
-            },
-            {
-                "email": "pushihin@inbox.ru",
-                "subject": "Test - Тест",
-                "text": "Test massage - Тескстовое сообщение",
-                "attachment": "auto_email\Daddy.jpg"
-            },
-            {
-                "email": "g.jarkovskij@yandex.ru",
-                "subject": "For Goga - Заголовок",
-                "text": "Derji papku ! - Тескстовое сообщение",
-                "attachment": "auto_email\Daddy.jpg"
-            },
+                "attachment": ["auto_email\steam.html"],
+                "html": "auto_email\steam.html"
+            }
+            # },
+            # {
+            #     "email": "pushihin@inbox.ru",
+            #     "subject": "Test - Тест",
+            #     "text": "Test massage - Тескстовое сообщение",
+            #     "attachment": ["auto_email\IMAGE 2023-01-19 22_43_10.pdf", "auto_email\Test.html"],
+            #     "html": "auto_email\Test.html"
+            # },
+            # {
+            #     "email": "g.jarkovskij@yandex.ru",
+            #     "subject": "For Goga - Заголовок",
+            #     "text": "Derji papku ! - Тескстовое сообщение",
+            #     "attachment": ["auto_email\IMAGE 2023-01-19 22_43_10.pdf", "auto_email\Test.html"],
+            #     "html": "auto_email\Test.html"
+            # },
         ]           
 
     man.broadcast_cache(l)

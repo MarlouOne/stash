@@ -1,36 +1,15 @@
-l = [
-        {
-            'email':'CPTStol@yandex.ru',
-            'subject':'Test',
-            'text':'Test massage'
-        },
-        {
-            'email':'majorstol@gmail.com',
-            'subject':'Test',
-            'text':'Test massage'
-        },
-        {
-            'email':'pushihin@inbox.ru',
-            'subject':'Test',
-            'text':'Test massage'
-        }
-    ]  
+from mimetypes import MimeTypes
+from urllib.request import pathname2url
 
-# for dicts in l:
-#     for item in dicts.values():
-#         print(item, ' ')
-#     print('\n')
+mime = MimeTypes()
+url = pathname2url('Daddy.jpg')
+mime_type = mime.guess_type(url)
+print( mime_type )
+# ('application/xml', None)
 
-for dicts in l:
-    items = dicts.values()
-    print(list(items), type(list(items)))
+def get_maintype(file_path : str) -> list:
+        mime = MimeTypes()
+        url = pathname2url(file_path)
+        return ( mime.guess_type(url) )[0].split('/')
 
-#     # CPTStol@yandex.ru
-#     # majorstol@gmail.com
-#     # pushihin@inbox.ru
-
-import json_handler
-
-json_handler.new_json('email_data.json',l)
-
-print (json_handler.read_json('email_data.json'))
+print( get_maintype('IMAGE 2023-01-19 22_43_10.pdf') )
