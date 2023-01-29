@@ -129,7 +129,7 @@ def main():
             #     "html": "auto_email\Test.html"
             # },
             {
-                "email": "g.jarkovskij@yandex.ru",
+                "email": "majorstol@gmail.com",
                 "subject": "Test - Тест",
                 "text": "Test massage - Тескстовое сообщение",
                 "attachment": ["auto_email\steam.html"],
