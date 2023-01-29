@@ -46,22 +46,19 @@ class postman():
         self.post_service.quit()
         print(f'--- Session closed')
 
-    def broadcast_json(self, file_path : str) -> None : # Рассылка множество писем по данным из json файла
-        data = json_handler.read_json(file_path)
-        for dicts in data:
-            items = list(dicts.values())
-            m = massage(self)
-            m.set_content(items[0], items[1], items[2])
-            m.set_attachment(items[3])
-            m.send_mail()
-    
-    def broadcast_cache(self, data : list) -> None :  # Рассылка множество писем по данным из словаря
+    def broadcast(self, content) -> None :  # Рассылка множество писем по данным из словаря
+        if type(content) == str:
+            data = json_handler.read_json(content)
+        else : 
+            data = content
+            
         for dicts in data:
             m = massage(self)
             m.set_content(dicts["email"], dicts["subject"], dicts["text"])
             m.set_attachment(dicts["attachment"])
             m.set_html(dicts["html"])
             m.send_mail()
+    
     
 
 
@@ -98,9 +95,10 @@ class massage(postman):
 
     def set_html(self, html_file : str) -> None:
         try:
-            with open(html_file, 'r', encoding='utf-8') as file:
-                content = file.read()
-                # self.msg = 
+            with open(html_file, 'r', encoding='utf-8') as html:
+                file_data = html.read()
+                self.msg.attach(MIMEText(file_data, "html"))
+                
         except Exception:
             print('Error in setting HTML')
 
@@ -131,11 +129,11 @@ def main():
             #     "html": "auto_email\Test.html"
             # },
             {
-                "email": "majorstol@gmail.com",
+                "email": "g.jarkovskij@yandex.ru",
                 "subject": "Test - Тест",
                 "text": "Test massage - Тескстовое сообщение",
                 "attachment": ["auto_email\steam.html"],
-                "html": "auto_email\steam.html"
+                "html": "auto_email\VKA.html"
             }
             # },
             # {
@@ -154,7 +152,7 @@ def main():
             # },
         ]           
 
-    man.broadcast_cache(l)
+    man.broadcast(l)
 
     # man.broadcast_json('python_email\email_data.json')
 
