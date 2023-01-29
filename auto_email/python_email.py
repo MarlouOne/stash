@@ -1,7 +1,7 @@
 import smtplib
 # import dependence.json_handler as json_handler
 from email.message import EmailMessage
-import imghdr
+# import imghdr
 
 from mimetypes import MimeTypes
 from urllib.request import pathname2url
@@ -86,19 +86,22 @@ class massage(postman):
         return ( mime.guess_type(url) )[0].split('/')
 
     def set_attachment(self, list_files) -> None:
-        for file_path in list_files:
-            with open(file_path, 'rb') as attachment:
-                file_data = attachment.read()
-                file_type =  self.get_maintype(file_path)
-                file_name = attachment.name
-                self.msg.add_attachment(file_data, maintype=file_type[0], subtype=file_type[1], filename=file_name.split('.')[0])
+        if len(list_files) != 0:
+            for file_path in list_files:
+                with open(file_path, 'rb') as attachment:
+                    file_data = attachment.read()
+                    file_type =  self.get_maintype(file_path)
+                    file_name = attachment.name
+                    self.msg.add_attachment(file_data, maintype=file_type[0], subtype=file_type[1], filename=file_name.split('.')[0])
+            
 
     def set_html(self, html_file : str) -> None:
         try:
             with open(html_file, 'r', encoding='utf-8') as html:
                 file_data = html.read()
-                self.msg.attach(MIMEText(file_data, "html"))
-                
+                # self.msg.attach(MIMEText(file_data, 'html')) # Yes                
+                # self.msg.add_attachment(MIMEText(file_data, 'html')) # Yes    
+                self.msg.set_content(MIMEText(file_data, 'html')) # Yes                
         except Exception:
             print('Error in setting HTML')
 
@@ -130,9 +133,9 @@ def main():
             # },
             {
                 "email": "majorstol@gmail.com",
-                "subject": "Test - Тест",
-                "text": "Test massage - Тескстовое сообщение",
-                "attachment": ["auto_email\steam.html"],
+                "subject": "Приглашение на олимпиаду от Военно-космической академии имени А.Ф.Можайского",
+                "text": "",
+                "attachment": [],
                 "html": "auto_email\VKA.html"
             }
             # },
