@@ -7,6 +7,8 @@ from mimetypes import MimeTypes
 from urllib.request import pathname2url
 from email.mime.text import MIMEText
 
+from getpass import getpass
+
 import sys
 import os
 sys.path.insert(0, os.path.abspath('./')) # Добавляем папку выше уровнем 
@@ -21,7 +23,7 @@ class postman():
         try:
             self.email = email
             self.post_service = smtplib.SMTP('smtp.gmail.com', 587)
-            # self.post_service = smtplib.SMTP('smtp.gmail.com', 587)
+            # self.post_service = smtplib.SMTP_SSL('smtp.yandex.ru', 465)
         
             self.post_service.starttls()
             self.post_service.login(email , password)
@@ -49,8 +51,10 @@ class postman():
     def broadcast(self, content) -> None :  # Рассылка множество писем по данным из словаря
         if type(content) == str:
             data = json_handler.read_json(content)
-        else : 
+        elif  type(content) == list:
             data = content
+        else:
+            raise(TypeError)
             
         for dicts in data:
             m = massage(self)
@@ -120,6 +124,7 @@ class massage(postman):
             print(f'--- Message delivered message to {self.msg["To"]}')
 
 def main():
+    # man = postman('CPTStol@yandex.ru', 'IamMarlouOne9131970') # Создаём сессию "EP"
     man = postman('majorstol@gmail.com', 'datwdfqcebyanyup') # Создаём сессию "EP"
     # man.self_check() # Проверка работоспособности соединения сессии
 
@@ -132,11 +137,11 @@ def main():
             #     "html": "auto_email\Test.html"
             # },
             {
-                "email": "majorstol@gmail.com",
+                "email": "pushihin@inbox.ru",
                 "subject": "Приглашение на олимпиаду от Военно-космической академии имени А.Ф.Можайского",
                 "text": "",
                 "attachment": [],
-                "html": "auto_email\VKA.html"
+                "html": 'auto_email\VKA.html'
             }
             # },
             # {
@@ -156,6 +161,7 @@ def main():
         ]           
 
     man.broadcast(l)
+    # man.broadcast('')
 
     # man.broadcast_json('python_email\email_data.json')
 
