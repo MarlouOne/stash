@@ -22,13 +22,24 @@ class postman():
     def __init__(self, email : str, password : str ) -> None: 
         try:
             self.email = email
-            self.post_service = smtplib.SMTP('smtp.gmail.com', 587)
-            # self.post_service = smtplib.SMTP_SSL('smtp.yandex.ru', 465)
-        
-            self.post_service.starttls()
+            
+            if email.find('yandex') != -1:
+                print(f"--- Connected from Yandex")
+                self.post_service = smtplib.SMTP_SSL('smtp.yandex.ru', 465) # , 465  , 587
+                # self.post_service.login(email , password)
+                # self.post_service.ehlo()
+                # self.post_service.starttls()
+            else:
+                print(f"--- Connected from Gmail")
+                self.post_service = smtplib.SMTP('smtp.gmail.com', 587)
+                self.post_service.starttls()
+                # self.post_service.login(email , password)
+            
             self.post_service.login(email , password)
-        except Exception:
-            print(f"--- Can`t connect {email} with password {password}")
+            
+        except Exception as e:
+            
+            print(f"--- Can`t connect {email} with password {password} and error {e}")
         else:
             print(f'--- Connected to {email} with password {password}')
         
@@ -124,8 +135,9 @@ class massage(postman):
             print(f'--- Message delivered message to {self.msg["To"]}')
 
 def main():
-    # man = postman('CPTStol@yandex.ru', 'IamMarlouOne9131970') # Создаём сессию "EP"
+    # man = postman('CPTStol@yandex.ru', 'xsiaobfatongsvja') # Создаём сессию "EP"
     man = postman('majorstol@gmail.com', 'datwdfqcebyanyup') # Создаём сессию "EP"
+    
     # man.self_check() # Проверка работоспособности соединения сессии
 
     l = [
@@ -137,11 +149,11 @@ def main():
             #     "html": "auto_email\Test.html"
             # },
             {
-                "email": "pushihin@inbox.ru",
+                "email": "majorstol@gmail.com",
                 "subject": "Приглашение на олимпиаду от Военно-космической академии имени А.Ф.Можайского",
-                "text": "",
-                "attachment": [],
-                "html": 'auto_email\VKA.html'
+                "text": "Бебра",
+                "attachment": ['auto_email\VKA_Promo_2.png'],
+                "html": 'auto_email\steam.html'
             }
             # },
             # {
