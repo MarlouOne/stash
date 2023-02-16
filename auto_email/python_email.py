@@ -26,14 +26,10 @@ class postman():
             if email.find('yandex') != -1:
                 print(f"--- Connected from Yandex")
                 self.post_service = smtplib.SMTP_SSL('smtp.yandex.ru', 465) # , 465  , 587
-                # self.post_service.login(email , password)
-                # self.post_service.ehlo()
-                # self.post_service.starttls()
             else:
                 print(f"--- Connected from Gmail")
                 self.post_service = smtplib.SMTP('smtp.gmail.com', 587)
                 self.post_service.starttls()
-                # self.post_service.login(email , password)
             
             self.post_service.login(email , password)
             
@@ -135,46 +131,22 @@ class massage(postman):
             print(f'--- Message delivered message to {self.msg["To"]}')
 
 def main():
-    # man = postman('CPTStol@yandex.ru', 'xsiaobfatongsvja') # Создаём сессию "EP"
-    man = postman('majorstol@gmail.com', 'datwdfqcebyanyup') # Создаём сессию "EP"
+    # man = postman('CPTStol@yandex.ru', '') # Создаём сессию "EP"
+    man = postman('majorstol@gmail.com', '') # Создаём сессию "EP"
     
     # man.self_check() # Проверка работоспособности соединения сессии
 
     l = [
-            # {
-            #     "email": "CPTStol@yandex.ru",
-            #     "subject": "Test - Тест",
-            #     "text": "Test massage - Тескстовое сообщение",
-            #     "attachment": ["auto_email\IMAGE 2023-01-19 22_43_10.pdf"],
-            #     "html": "auto_email\Test.html"
-            # },
             {
-                "email": "majorstol@gmail.com",
-                "subject": "Приглашение на олимпиаду от Военно-космической академии имени А.Ф.Можайского",
+                "email": "",
+                "subject": "Приглашение на олимпиаду ",
                 "text": "Бебра",
-                "attachment": ['auto_email\VKA_Promo_2.png'],
+                "attachment": ['auto_email\Promo_2.png'],
                 "html": 'auto_email\steam.html'
             }
-            # },
-            # {
-            #     "email": "pushihin@inbox.ru",
-            #     "subject": "Test - Тест",
-            #     "text": "Test massage - Тескстовое сообщение",
-            #     "attachment": ["auto_email\IMAGE 2023-01-19 22_43_10.pdf", "auto_email\Test.html"],
-            #     "html": "auto_email\Test.html"
-            # },
-            # {
-            #     "email": "g.jarkovskij@yandex.ru",
-            #     "subject": "For Goga - Заголовок",
-            #     "text": "Derji papku ! - Тескстовое сообщение",
-            #     "attachment": ["auto_email\IMAGE 2023-01-19 22_43_10.pdf", "auto_email\Test.html"],
-            #     "html": "auto_email\Test.html"
-            # },
         ]           
 
     man.broadcast(l)
-    # man.broadcast('')
-
     # man.broadcast_json('python_email\email_data.json')
 
     man.drop_service()

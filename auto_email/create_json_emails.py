@@ -29,17 +29,7 @@ def set_dict(emails : list, subject : str, text : str, attachment : list, html :
         
 def main(file_name : str, subject : str, text : str, attachment : list, html : str):
     emails = get_list(file_name)
-    # pprint(emails)
     emails = set_dict(emails, subject, text, attachment, html)
-    # pprint(emails)
     jh.add_json('auto_email\emails_json.json', emails)
     
-main('auto_email\src\школы без дубликатов.txt', "Приглашение на олимпиаду от Военно-космической академии имени А.Ф.Можайского", '', [], "auto_email\VKA.html")
-
-            # {
-            #     "email": "majorstol@gmail.com",
-            #     "subject": "Приглашение на олимпиаду от Военно-космической академии имени А.Ф.Можайского",
-            #     "text": "",
-            #     "attachment": ["auto_email\VKA.html"],
-            #     "html": "auto_email\VKA.html"
-            # }
+main('auto_email\src\школы без дубликатов.txt', "Приглашение на олимпиаду ", '', [], "auto_email\Test.html")
