@@ -150,7 +150,7 @@ def rotate(img, angle):
 
 # img = cv2.imread('Machine_vision\src\qg-MLG+.jpg') # загружаем фото
 img= np.zeros((300, 300, 3), dtype='uint8') # Создаём матрицу, которая является "холстом" размером "ширина на высоту"
-circle = cv2.circle( img)
+circle = cv2.circle( img )
 
 cv2.imshow('Photo', img) # Показываем фото
 cv2.waitKey(0) # Сколько картинка будет открыта. 0 == бесконечность
