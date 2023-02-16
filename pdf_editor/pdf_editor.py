@@ -17,9 +17,9 @@ for page in pdf.pages:
     print( page.extract_text() )
     
     text = page.extract_text()
-    text = text.replace('Фамилия', 'Пыня')
+    text = text.replace('Фамилия', 'Андрей')
     text = text.replace('Имя', 'Владимирович')
-    text = text.replace('____', 'Дохуя')
+    text = text.replace('____', 'Много')
     
     print(text)
     # page.writeToStream()
