@@ -14,6 +14,10 @@ def nothing(x):
     pass
 
 img = cv2.imread(r'Machine_vision\src\boxs.jpg') # загружаем фото
+# img = cv2.imread(r'Machine_vision\src\  (11).jpg') # загружаем фото
+# img = img.resize(( int(img.shape[0]*0.5), int(img.shape[1]*0.5)))
+img = cv2.resize(img, (1024, 1024))
+
 cv2.imshow('Photo', img) # Показываем фото
 
 cv2.namedWindow('track')
@@ -32,8 +36,16 @@ while True:
     canny = cv2.Canny(gray, thresh1, thresh2)
     dil = cv2.dilate(canny, kernel, iterations=1)
     
-    contours, hir = cv2.findContours(img, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE) # Находим контуры изображения
+    contours, h = cv2.findContours(dil, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE) # Находим контуры изображения
 
+    for contour in contours:
+        area = cv2.contourArea(contour)
+        if area > 100000:
+            cv2.drawContours(frame, contour, -1, (200, 200, 0), 3)
+            p = cv2.arcLength( contour, True)
+            num = cv2.approxPolyDP(contour, 0.03*p, True)
+            x,y,w,h = cv2.boundingRect(num)
+            cv2.rectangle( frame, (x, y, x + w, y + h), (0,0,256), 4)
 
     cv2.imshow('Frame', frame)
     cv2.imshow('Gray', gray)
