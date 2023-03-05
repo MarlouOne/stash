@@ -81,6 +81,14 @@ class Image():
             plt.imshow(self.objects[i].image)
         plt.show()
 
+    '''def get_mask(self, height = 1024, width = 1024) -> None:
+        convas = np.zeros( ( height, width, len(self.objects)) , dtype='uint8') # zeros
+        buffer = []
+        for item in self.objects: buffer.append(item.mask)
+        convas = cv2.merge(buffer) # Объединение цветовых слоёв
+            
+        self.mask = convas
+    '''
     def get_mask(self, height = 1024, width = 1024) -> None:
         convas = np.zeros( ( height, width, 3) , dtype='uint8') # zeros
         for object in self.objects:
@@ -88,37 +96,53 @@ class Image():
             roi = convas[:rows, :cols]
 
             # Создать маску
-            img2gray = cv2.cvtColor(object.mask, cv2.COLOR_BGR2GRAY)
-            ret, mask = cv2.threshold(img2gray, 1, 255, cv2.THRESH_BINARY)
+            ''' img2gray = cv2.cvtColor(object.mask, cv2.COLOR_BGR2GRAY)
+            ret, mask = cv2.threshold(img2gray, 1, 255, cv2.THRESH_BINARY)'''
+            ret, mask = cv2.threshold(object.mask, 1, 255, cv2.THRESH_BINARY)
             mask_inv = cv2.bitwise_not(mask)
 
             # Сохраните фон, кроме логотипа
             img1_bg = cv2.bitwise_and(roi, roi, mask=mask_inv)
             dst = cv2.add(img1_bg, object.mask)  # Выполнить фьюжн
-            convas[:rows, :cols] = dst  # Ставим на исходное изображение после слияния
-        
+            convas[:rows, :cols] = dst  # Ставим на исходное изображение после слияния 
         self.mask = convas
-        # cv2.imshow('Mask', convas)
-        # cv2.waitKey(0)
-        # cv2.destroyAllWindows()   
         
     def drop_data(self) -> None:
         self.height     = -1 
         self.width      = -1
         self.name       = ''
         self.background = cv2.Mat
-        self.mask       = cv2.Mat
+        # self.mask       = cv2.Mat
         self.objects    = []
         
-    def save(self, image_path : str, mask_path : str, file_name : str) -> None:
+    def save(self, image_path : str, mask_path : str, file_name : str, CLASSES : list) -> None:
         #save matrix/array as image file
+        # class_buffer = CLASSES.copy()
         image_path = image_path + '\\' + f'image_{file_name}.png'
-        mask_path  = mask_path +  '\\' + f'mask_{file_name}.png'
         image_isWritten = cv2.imwrite(image_path, self.background)
         if image_isWritten: print(f'Image {file_name} is successfully saved as file.')
-        mask_isWritten = cv2.imwrite(mask_path, self.mask)
-        if mask_isWritten: print( f'Mask {file_name} is successfully saved as file.')
-        
+
+        current_labels = self.get_current_labels()
+        print(current_labels)
+
+        for key in CLASSES.keys():
+            if key in current_labels:
+                index = current_labels.index(key)
+                current_mask_path  = mask_path +  '\\' + f'mask_{file_name}_{self.objects[index].label}.png'   
+                print(current_mask_path)
+                # show_image( self.objects[index].mask )     
+                mask_isWritten = cv2.imwrite(current_mask_path, self.objects[index].mask)
+            else:
+                current_mask_path  = mask_path +  '\\' + f'mask_{file_name}_{key}.png'        
+                # show_image( np.zeros( ( self.height, self.width, 1) , dtype='uint8') )
+                mask_isWritten = cv2.imwrite( current_mask_path, np.zeros( ( 1024, 1024, 1) , dtype='uint8') ) # zeros)
+
+    def get_current_labels(self) -> list:
+        result = []
+        for item in self.objects:
+            result.append(item.label)
+        return result
+    
 
 class Image_object():
     label : str
@@ -162,17 +186,12 @@ class Image_object():
         
         self.image = img1
         
-        # cv2.imshow('img1', img1)
-        # cv2.waitKey(0)
-        # cv2.destroyAllWindows()
-        
         hsv = cv2.cvtColor(img1, cv2.COLOR_BGR2HSV)
         lower = np.array([0, 0, 1])
         upper = np.array([180, 255, 255])
         mask = cv2.inRange(hsv, lower, upper)
-        # mask[np.all(mask != (0,0,0), axis=-1)] = (color, color, color) # self.color # (color, color, color)
-        
-        # self.mask = cv2.cvtColor(mask, cv2.COLOR_HSV2BGR)
+
+        '''self.mask = cv2.cvtColor(mask, cv2.COLOR_HSV2BGR)
         h, w = mask.shape
         r = mask.reshape( (h,w,1) )
         g = mask.reshape( (h,w,1) )
@@ -181,12 +200,13 @@ class Image_object():
         g[np.all(g != (0), axis=-1)] = (color)
         b[np.all(b != (0), axis=-1)] = (color)
         mask = cv2.merge([r,g,b]) # Объединение цветовых слоёв
-        
-        # cv2.imshow('mask', mask)
-        # cv2.waitKey(0)
-        # cv2.destroyAllWindows()
-        
         mask = cv2.cvtColor(mask, cv2.COLOR_HSV2BGR)
+        '''
+        
+        h, w = mask.shape
+        mask = mask.reshape( (h,w,1) )
+        mask[np.all(mask != (0), axis=-1)] = (color)
+        
         self.mask = mask
         
     def set_size(self, height = 1024, width = 1024) -> None:
@@ -199,9 +219,11 @@ class Image_object():
         plt.imshow(self.image)
         plt.subplot(1, 2, 2)
         plt.imshow(self.mask)
-        
         plt.show()
 
+def show_image(image : cv2.Mat) -> None:
+    plt.imshow(image)
+    plt.show()
 
 def get_random_item(directory):
     items = os.listdir( directory ) 
@@ -216,26 +238,18 @@ def main(image_count : int , directory : str, min_obj_count = 1) -> None:
     CLASS = os.listdir( directory + '\image' ) 
     
     CLASS = get_palette(CLASS)
+    print( CLASS )
+    
     
     image_path = r'augmentation\results\argus\image'
     mask_path  = r'augmentation\results\argus\mask'
     
-    # pprint(CLASS)
-    # img = Image()
-    # img.set_name('image')
-    # # print(os.listdir( directory + '\\back' ) )
-    # # print( directory + '\\back'+ '\\' + get_random_item( directory + '\\back') )
-    # img.set_background( directory + '\\back\\' + get_random_item( directory + '\\back') )
-    # img.set_size()
     img = Image()  
     
     for i in range( image_count ):
         class_buffer = CLASS.copy()
         
-        
         img.set_name('image')
-        # print(os.listdir( directory + '\\back' ) )
-        # print( directory + '\\back'+ '\\' + get_random_item( directory + '\\back') )
         img.set_background( directory + '\\back\\' + get_random_item( directory + '\\back') )
         img.set_size()
         
@@ -256,31 +270,20 @@ def main(image_count : int , directory : str, min_obj_count = 1) -> None:
             
             del class_buffer[rand_CLASS] # CLASS.remove(rand_CLASS) 
             
-        # print(len(class_buffer.keys()))
-        
         img.get_image()
         # img.show_all_image()
         # img.show_all_masks()
-        img.get_mask()
-        img.save(image_path, mask_path, str(i))
+        # img.get_mask()
+        img.save(image_path, mask_path, str(i), CLASS)
+        
+        # show_image(img.background)
+        # show_image(img.mask)
+        
         img.drop_data()
         
-        
-        # for file in os.listdir( directory ):         
-            
-        #     pprint( os.listdir( directory ) )
-            
-            # filename = os.path.join( directory, file ) # checking if it is a file
-            
-            # if not os.path.isfile( filename ):
-            #     continue
-        
-
-        
-
 if __name__ == '__main__': 
     directory = r'augmentation\samples\argus'
-    image_count = 1000
+    image_count = 1
     # directory = r'Machine_vision\src\test_json'
     main(image_count,directory)
 
