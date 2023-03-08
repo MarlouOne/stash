@@ -1,0 +1,650 @@
+{
+   "0":{
+      "price":33980,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/smartfon-apple-iphone-se-2020-256gb-black",
+      "title":"IPhone Se",
+      "color":"Черный",
+      "memory":"256",
+      "type":null,
+      "model":"Se"
+   },
+   "1":{
+      "price":33980,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/smartfon-apple-iphone-se-2020-256gb-red",
+      "title":"IPhone Se",
+      "color":"Красный",
+      "memory":"256",
+      "type":null,
+      "model":"Se"
+   },
+   "2":{
+      "price":33980,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/smartfon-apple-iphone-se-2020-256gb-white",
+      "title":"IPhone Se",
+      "color":"Белый",
+      "memory":"256",
+      "type":null,
+      "model":"Se"
+   },
+   "3":{
+      "price":35850,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/smartfon-apple-iphone-11-64gb-black-1",
+      "title":"IPhone 11",
+      "color":"Черный",
+      "memory":"64",
+      "type":null,
+      "model":"11"
+   },
+   "4":{
+      "price":37940,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/smartfon-apple-iphone-se-2022-128gb-midnight",
+      "title":"IPhone Se",
+      "color":null,
+      "memory":"128",
+      "type":null,
+      "model":"Se"
+   },
+   "5":{
+      "price":37940,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/smartfon-apple-iphone-se-2022-128gb-red",
+      "title":"IPhone Se",
+      "color":"Красный",
+      "memory":"128",
+      "type":null,
+      "model":"Se"
+   },
+   "6":{
+      "price":37940,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/smartfon-apple-iphone-se-2022-128gb-starlight",
+      "title":"IPhone Se",
+      "color":"Белый",
+      "memory":"128",
+      "type":null,
+      "model":"Se"
+   },
+   "7":{
+      "price":37980,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/smartfon-apple-iphone-11-64gb-white-1",
+      "title":"IPhone 11",
+      "color":"Белый",
+      "memory":"64",
+      "type":null,
+      "model":"11"
+   },
+   "8":{
+      "price":43230,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/apple-iphone-11-128gb-black-mhdh3hn-a",
+      "title":"IPhone 11",
+      "color":"Черный",
+      "memory":"128",
+      "type":null,
+      "model":"11"
+   },
+   "9":{
+      "price":44270,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/smartfon-apple-iphone-11-128gb-red",
+      "title":"IPhone 11",
+      "color":"Красный",
+      "memory":"128",
+      "type":null,
+      "model":"11"
+   },
+   "10":{
+      "price":52970,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/smartfon-apple-iphone-12-128gb-black-1",
+      "title":"IPhone 12",
+      "color":"Черный",
+      "memory":"128",
+      "type":null,
+      "model":"12"
+   },
+   "11":{
+      "price":52970,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/smartfon-apple-iphone-12-128gb-white",
+      "title":"IPhone 12",
+      "color":"Белый",
+      "memory":"128",
+      "type":null,
+      "model":"12"
+   },
+   "12":{
+      "price":52980,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/smartfon-apple-iphone-12-128gb-blue",
+      "title":"IPhone 12",
+      "color":"Синий",
+      "memory":"128",
+      "type":null,
+      "model":"12"
+   },
+   "13":{
+      "price":53490,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/apple-iphone-12-64gb-white",
+      "title":"IPhone 12",
+      "color":"Белый",
+      "memory":"64",
+      "type":null,
+      "model":"12"
+   },
+   "14":{
+      "price":58470,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/smartfon-apple-iphone-13-mini-128gb-starlight",
+      "title":"IPhone 13",
+      "color":"Белый",
+      "memory":"128",
+      "type":"Mini",
+      "model":"13"
+   },
+   "15":{
+      "price":58770,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/smartfon-apple-iphone-13-mini-128gb-pink",
+      "title":"IPhone 13",
+      "color":"Розовый",
+      "memory":"128",
+      "type":"Mini",
+      "model":"13"
+   },
+   "16":{
+      "price":59800,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/smartfon-apple-iphone-13-128gb-dual-sim-blue",
+      "title":"IPhone 13",
+      "color":"Синий",
+      "memory":"128",
+      "type":null,
+      "model":"13"
+   },
+   "17":{
+      "price":59980,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/smartfon-apple-iphone-13-128gb-dual-sim-green",
+      "title":"IPhone 13",
+      "color":"Зелёный",
+      "memory":"128",
+      "type":null,
+      "model":"13"
+   },
+   "18":{
+      "price":59980,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/smartfon-apple-iphone-13-128gb-dual-sim-midnight",
+      "title":"IPhone 13",
+      "color":null,
+      "memory":"128",
+      "type":null,
+      "model":"13"
+   },
+   "19":{
+      "price":59980,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/smartfon-apple-iphone-13-128gb-dual-sim-pink",
+      "title":"IPhone 13",
+      "color":"Розовый",
+      "memory":"128",
+      "type":null,
+      "model":"13"
+   },
+   "20":{
+      "price":59980,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/smartfon-apple-iphone-13-128gb-dual-sim-starlight",
+      "title":"IPhone 13",
+      "color":"Белый",
+      "memory":"128",
+      "type":null,
+      "model":"13"
+   },
+   "21":{
+      "price":60980,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/apple-iphone-13-128gb-blue-mlp13",
+      "title":"IPhone 13",
+      "color":"Синий",
+      "memory":"128",
+      "type":null,
+      "model":"13"
+   },
+   "22":{
+      "price":60980,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/apple-iphone-13-128gb-pink-mlph3",
+      "title":"IPhone 13",
+      "color":"Розовый",
+      "memory":"128",
+      "type":null,
+      "model":"13"
+   },
+   "23":{
+      "price":61870,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/apple-iphone-13-128gb-midnight-mlml3",
+      "title":"IPhone 13",
+      "color":null,
+      "memory":"128",
+      "type":null,
+      "model":"13"
+   },
+   "24":{
+      "price":63480,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/smartfon-apple-iphone-13-mini-256gb-starlight",
+      "title":"IPhone 13",
+      "color":"Белый",
+      "memory":"256",
+      "type":"Mini",
+      "model":"13"
+   },
+   "25":{
+      "price":66970,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/smartfon-apple-iphone-14-128gb-blue",
+      "title":"IPhone 14",
+      "color":"Синий",
+      "memory":"128",
+      "type":null,
+      "model":"14"
+   },
+   "26":{
+      "price":67870,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/smartfon-apple-iphone-14-128gb-dual-sim-purple",
+      "title":"IPhone 14",
+      "color":"Фиолетовый",
+      "memory":"128",
+      "type":null,
+      "model":"14"
+   },
+   "27":{
+      "price":67870,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/smartfon-apple-iphone-14-128gb-midnight-1",
+      "title":"IPhone 14",
+      "color":null,
+      "memory":"128",
+      "type":null,
+      "model":"14"
+   },
+   "28":{
+      "price":67870,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/smartfon-apple-iphone-14-128gb-purple",
+      "title":"IPhone 14",
+      "color":"Фиолетовый",
+      "memory":"128",
+      "type":null,
+      "model":"14"
+   },
+   "29":{
+      "price":67870,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/smartfon-apple-iphone-14-128gb-starlight-1",
+      "title":"IPhone 14",
+      "color":"Белый",
+      "memory":"128",
+      "type":null,
+      "model":"14"
+   },
+   "30":{
+      "price":68980,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/smartfon-apple-iphone-13-mini-512gb-pink",
+      "title":"IPhone 13",
+      "color":"Розовый",
+      "memory":"512",
+      "type":"Mini",
+      "model":"13"
+   },
+   "31":{
+      "price":69980,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/apple-iphone-13-256gb-midnight-mlmu3",
+      "title":"IPhone 13",
+      "color":null,
+      "memory":"256",
+      "type":null,
+      "model":"13"
+   },
+   "32":{
+      "price":71980,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/smartfon-apple-iphone-14-256gb-midnight-1",
+      "title":"IPhone 14",
+      "color":null,
+      "memory":"256",
+      "type":null,
+      "model":"14"
+   },
+   "33":{
+      "price":73980,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/smartfon-apple-iphone-14-plus-128gb-blue",
+      "title":"IPhone 14",
+      "color":"Синий",
+      "memory":"128",
+      "type":"Plus",
+      "model":"14"
+   },
+   "34":{
+      "price":74480,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/smartfon-apple-iphone-14-plus-128gb-dual-sim-red",
+      "title":"IPhone 14",
+      "color":"Красный",
+      "memory":"128",
+      "type":"Plus",
+      "model":"14"
+   },
+   "35":{
+      "price":74780,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/smartfon-apple-iphone-14-plus-128gb-starlight",
+      "title":"IPhone 14",
+      "color":"Белый",
+      "memory":"128",
+      "type":"Plus",
+      "model":"14"
+   },
+   "36":{
+      "price":74980,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/smartfon-apple-iphone-14-plus-128gb-dual-sim-purple",
+      "title":"IPhone 14",
+      "color":"Фиолетовый",
+      "memory":"128",
+      "type":"Plus",
+      "model":"14"
+   },
+   "37":{
+      "price":74980,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/smartfon-apple-iphone-14-plus-128gb-purple",
+      "title":"IPhone 14",
+      "color":"Фиолетовый",
+      "memory":"128",
+      "type":"Plus",
+      "model":"14"
+   },
+   "38":{
+      "price":77480,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/apple-iphone-13-512gb-red",
+      "title":"IPhone 13",
+      "color":"Красный",
+      "memory":"512",
+      "type":null,
+      "model":"13"
+   },
+   "39":{
+      "price":78880,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/smartfon-apple-iphone-14-plus-256gb-blue",
+      "title":"IPhone 14",
+      "color":"Синий",
+      "memory":"256",
+      "type":"Plus",
+      "model":"14"
+   },
+   "40":{
+      "price":78970,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/smartfon-apple-iphone-14-plus-256gb-dual-sim-midnight",
+      "title":"IPhone 14",
+      "color":null,
+      "memory":"256",
+      "type":"Plus",
+      "model":"14"
+   },
+   "41":{
+      "price":78980,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/smartfon-apple-iphone-14-256gb-dual-sim-blue",
+      "title":"IPhone 14",
+      "color":"Синий",
+      "memory":"256",
+      "type":null,
+      "model":"14"
+   },
+   "42":{
+      "price":78980,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/smartfon-apple-iphone-14-256gb-dual-sim-starlight",
+      "title":"IPhone 14",
+      "color":"Белый",
+      "memory":"256",
+      "type":null,
+      "model":"14"
+   },
+   "43":{
+      "price":79480,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/smartfon-apple-iphone-14-plus-256gb-dual-sim-blue",
+      "title":"IPhone 14",
+      "color":"Синий",
+      "memory":"256",
+      "type":"Plus",
+      "model":"14"
+   },
+   "44":{
+      "price":79480,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/smartfon-apple-iphone-14-plus-256gb-dual-sim-starlight",
+      "title":"IPhone 14",
+      "color":"Белый",
+      "memory":"256",
+      "type":"Plus",
+      "model":"14"
+   },
+   "45":{
+      "price":84870,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/smartfon-apple-iphone-14-plus-512gb-dual-sim-midnight",
+      "title":"IPhone 14",
+      "color":null,
+      "memory":"512",
+      "type":"Plus",
+      "model":"14"
+   },
+   "46":{
+      "price":84870,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/smartfon-apple-iphone-14-plus-512gb-dual-sim-purple",
+      "title":"IPhone 14",
+      "color":"Фиолетовый",
+      "memory":"512",
+      "type":"Plus",
+      "model":"14"
+   },
+   "47":{
+      "price":84870,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/smartfon-apple-iphone-14-plus-512gb-dual-sim-starlight",
+      "title":"IPhone 14",
+      "color":"Белый",
+      "memory":"512",
+      "type":"Plus",
+      "model":"14"
+   },
+   "48":{
+      "price":86980,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/smartfon-apple-iphone-12-pro-max-512gb-silver",
+      "title":"IPhone 12",
+      "color":"Серебряный",
+      "memory":"512",
+      "type":"Pro",
+      "model":"12"
+   },
+   "49":{
+      "price":90980,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/smartfon-apple-iphone-14-pro-128gb-silver",
+      "title":"IPhone 14",
+      "color":"Серебряный",
+      "memory":"128",
+      "type":"Pro",
+      "model":"14"
+   },
+   "50":{
+      "price":94980,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/smartfon-apple-iphone-14-pro-max-128gb-gold",
+      "title":"IPhone 14",
+      "color":"Золотой",
+      "memory":"128",
+      "type":"Pro",
+      "model":"14"
+   },
+   "51":{
+      "price":94980,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/smartfon-apple-iphone-14-pro-max-128gb-esim-silver",
+      "title":"IPhone 14",
+      "color":"Серебряный",
+      "memory":"128",
+      "type":"Pro",
+      "model":"14"
+   },
+   "52":{
+      "price":94980,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/smartfon-apple-iphone-14-pro-max-128gb-esim-space-black",
+      "title":"IPhone 14",
+      "color":"Черный",
+      "memory":"128",
+      "type":"Pro",
+      "model":"14"
+   },
+   "53":{
+      "price":95980,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/apple-iphone-13-pro-256gb-alpine-green-mndu3",
+      "title":"IPhone 13",
+      "color":"Зелёный",
+      "memory":"256",
+      "type":"Pro",
+      "model":"13"
+   },
+   "54":{
+      "price":95980,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/smartfon-apple-iphone-14-pro-256gb-esim-silver",
+      "title":"IPhone 14",
+      "color":"Серебряный",
+      "memory":"256",
+      "type":"Pro",
+      "model":"14"
+   },
+   "55":{
+      "price":95980,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/smartfon-apple-iphone-14-pro-max-128gb-deep-purple",
+      "title":"IPhone 14",
+      "color":"Фиолетовый",
+      "memory":"128",
+      "type":"Pro",
+      "model":"14"
+   },
+   "56":{
+      "price":97980,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/smartfon-apple-iphone-14-pro-max-128gb-gold-1",
+      "title":"IPhone 14",
+      "color":"Золотой",
+      "memory":"128",
+      "type":"Pro",
+      "model":"14"
+   },
+   "57":{
+      "price":98770,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/smartfon-apple-iphone-14-pro-max-128gb-silver",
+      "title":"IPhone 14",
+      "color":"Серебряный",
+      "memory":"128",
+      "type":"Pro",
+      "model":"14"
+   },
+   "58":{
+      "price":98970,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/smartfon-apple-iphone-14-pro-max-128gb-dual-sim-space-black",
+      "title":"IPhone 14",
+      "color":"Черный",
+      "memory":"128",
+      "type":"Pro",
+      "model":"14"
+   },
+   "59":{
+      "price":98970,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/smartfon-apple-iphone-14-pro-max-128gb-space-black",
+      "title":"IPhone 14",
+      "color":"Черный",
+      "memory":"128",
+      "type":"Pro",
+      "model":"14"
+   },
+   "60":{
+      "price":99870,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/smartfon-apple-iphone-14-pro-max-128gb-dual-sim-deep-purple",
+      "title":"IPhone 14",
+      "color":"Фиолетовый",
+      "memory":"128",
+      "type":"Pro",
+      "model":"14"
+   },
+   "61":{
+      "price":99870,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/smartfon-apple-iphone-14-pro-max-128gb-deep-purple-1",
+      "title":"IPhone 14",
+      "color":"Фиолетовый",
+      "memory":"128",
+      "type":"Pro",
+      "model":"14"
+   },
+   "62":{
+      "price":102980,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/smartfon-apple-iphone-14-pro-max-256gb-gold-2",
+      "title":"IPhone 14",
+      "color":"Золотой",
+      "memory":"256",
+      "type":"Pro",
+      "model":"14"
+   },
+   "63":{
+      "price":109980,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/smartfon-apple-iphone-14-pro-max-256gb-space-black-2",
+      "title":"IPhone 14",
+      "color":"Черный",
+      "memory":"256",
+      "type":"Pro",
+      "model":"14"
+   },
+   "64":{
+      "price":110770,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/smartfon-apple-iphone-14-pro-max-256gb-space-black-1",
+      "title":"IPhone 14",
+      "color":"Черный",
+      "memory":"256",
+      "type":"Pro",
+      "model":"14"
+   },
+   "65":{
+      "price":111470,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/smartfon-apple-iphone-14-pro-max-256gb-silver",
+      "title":"IPhone 14",
+      "color":"Серебряный",
+      "memory":"256",
+      "type":"Pro",
+      "model":"14"
+   },
+   "66":{
+      "price":111980,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/apple-iphone-13-pro-max-512gb-alpine-green-mncr3",
+      "title":"IPhone 13",
+      "color":"Зелёный",
+      "memory":"512",
+      "type":"Pro",
+      "model":"13"
+   },
+   "67":{
+      "price":114980,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/smartfon-apple-iphone-14-pro-512gb-deep-purple-1",
+      "title":"IPhone 14",
+      "color":"Фиолетовый",
+      "memory":"512",
+      "type":"Pro",
+      "model":"14"
+   },
+   "68":{
+      "price":118800,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/apple-iphone-13-pro-256gb-silver",
+      "title":"IPhone 13",
+      "color":"Серебряный",
+      "memory":"256",
+      "type":"Pro",
+      "model":"13"
+   },
+   "69":{
+      "price":118880,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/smartfon-apple-iphone-14-pro-512gb-gold",
+      "title":"IPhone 14",
+      "color":"Золотой",
+      "memory":"512",
+      "type":"Pro",
+      "model":"14"
+   },
+   "70":{
+      "price":120980,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/smartfon-apple-iphone-14-pro-max-512gb-space-black",
+      "title":"IPhone 14",
+      "color":"Черный",
+      "memory":"512",
+      "type":"Pro",
+      "model":"14"
+   },
+   "71":{
+      "price":129880,
+      "href":"https:\/\/gsmbutik.ru\/smartfony\/apple\/smartfon-apple-iphone-14-pro-max-1tb-esim-space-black",
+      "title":"IPhone 14",
+      "color":"Черный",
+      "memory":"1",
+      "type":"Pro",
+      "model":"14"
+   }
+}
